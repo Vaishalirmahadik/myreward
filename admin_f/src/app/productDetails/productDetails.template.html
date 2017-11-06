@@ -1,0 +1,74 @@
+<div class="row">
+    <h1 class="page-title col-lg-6">{{name}} <small><small>{{brandName}}</small></small>
+    </h1>
+    <p class="col-lg-6">
+
+        <button [routerLink]=" ['/app/addProduct-page/'+ productId] " class="btn btn-inverse width-100 mb-xs float-r" style="float: right;    margin: 5px;" role="button">
+           Edit
+          </button>
+        <button style="float: right;    margin: 5px;" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Activate
+          </button>
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <section class="widget" widget>
+
+            <div class="widget-body">
+                <img class="back" src="{{activeImg}}" height="300px" width="500px">
+
+
+            </div>
+        </section>
+        <section class="widget" widget>
+
+            <div class="widget-body">
+                <img (click)="selectActiveImg(i)" *ngFor="let i of images" src="{{i}}" class="back" style="    margin: 8px;" height="80px" width="80px">
+
+            </div>
+            <iframe width="80" height="80" src="https://www.youtube.com/embed/3C5JH2u5r78" frameborder="0" allowfullscreen></iframe>
+            <iframe width="80" height="80" src="https://www.youtube.com/embed/3C5JH2u5r78" frameborder="0" allowfullscreen></iframe>
+
+        </section>
+
+    </div>
+    <div class="col-lg-6">
+        <section class="widget" widget>
+
+            <div class="widget-body">
+                <legend>Description</legend>
+
+                <div [innerHTML]="description"></div>
+
+                <br>
+                <legend>No. of Available Items</legend>
+                <p>{{nAvailable}}</p>
+                <legend>Category</legend>
+                <p>{{category}}</p>
+
+                <legend>Facebook Page Link</legend>
+                <p>{{fbLink}}</p>
+                <legend>Survey Questions</legend>
+                <p>{{survey}}</p>
+
+
+                <br>
+                <legend>Target Audience</legend>
+                <p>Age : {{this.minAge}} - {{this.maxAge}}</p>
+                <p>Gender : {{this.gender}}</p>
+                <p>Location : {{this.location}}</p>
+                <br>
+                <legend>Rules</legend>
+                <p>Items Available per day per user : {{perdayperuser}}</p>
+                <p>Items Available per week per user : {{perweekperuser}}</p>
+                <p>Items Available per month per user :{{permonthperuser}}</p>
+
+
+            </div>
+        </section>
+
+
+    </div>
+</div>
