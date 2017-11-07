@@ -11,12 +11,22 @@ async function logic({ context, params }) {
         // const products = await Product.find().skip(onPageResults * pageNo)
         //     .limit(onPageResults)
         //     .exec();
+        if (params._id == "all") {
 
-        const products = await Product.find({ brand: params._id })
+            const products = await Product.find()
 
-        const totalResults = await Product.count({ brand: params._id });
+            const totalResults = await Product.count();
+            return { products, totalResults };
+        } else {
 
-        return { products, totalResults };
+            const products = await Product.find({ brand: params._id })
+
+            const totalResults = await Product.count({ brand: params._id });
+            return { products, totalResults };
+
+        }
+
+
 
     } catch (e) {
         logger.error(e);

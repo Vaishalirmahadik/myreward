@@ -195,9 +195,11 @@
                 <form class="login-form mt-lg">
 
                     <div class="form-group">
+                        Name
                         <input type="text" class="form-control" placeholder="Name">
                     </div>
                     <div class="form-group">
+
                         <input type="text" class="form-control" placeholder="Email">
                     </div>
                     <div class="form-group">
@@ -216,8 +218,11 @@
                         <input type="text" class="form-control" placeholder="Country">
                     </div>
                     <div class="form-group">
+
                         <input type="text" class="form-control" placeholder="Interests">
                     </div>
+
+
 
                     <div style="    text-align: center;">
                         <button class="btn btn-primary" type="button">
@@ -239,6 +244,39 @@
     border-style: double;">
         <h4>Brands</h4>
 
+
+        <div *ngIf="show == 'brand'" (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="row" style="padding:20px 10px;z-index:10">
+            <div class="col-lg-4">
+                <ul>
+                    <li>Brand 1</li>
+                    <li>Brand 2</li>
+
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul>
+                    <li>Brand 1</li>
+                    <li>Brand 2</li>
+
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul>
+                    <li>Brand 1</li>
+                    <li>Brand 2</li>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-4">
+                <ul>
+                    <li>Brand 1</li>
+                    <li>Brand 2</li>
+
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <div (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="col-lg-6" style="border-width: thin;
@@ -249,71 +287,102 @@
     border-style: double;">
         <h4>Categories</h4>
 
-    </div>
+        <!--</div>-->
+        <div *ngIf="show == 'cat'" (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="row" style="padding:20px 10px;">
+            <div class="col-lg-4">
+                <ul>
+                    <li>Cat 1</li>
+                    <li>Cat 2</li>
 
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul>
+                    <li>Cat 1</li>
+                    <li>Cat 2</li>
 
-</div>
-<div *ngIf="show == 'brand'" (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="row" style="padding:20px 10px;z-index:10">
-    <div class="col-lg-4">
-        <ul>
-            <li>Brand 1</li>
-            <li>Brand 2</li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul>
+                    <li>Cat 1</li>
+                    <li>Cat 2</li>
 
-        </ul>
-    </div>
-    <div class="col-lg-4">
-        <ul>
-            <li>Brand 1</li>
-            <li>Brand 2</li>
+                </ul>
+            </div>
 
-        </ul>
-    </div>
-    <div class="col-lg-4">
-        <ul>
-            <li>Brand 1</li>
-            <li>Brand 2</li>
+            <div class="col-lg-4">
+                <ul>
+                    <li>Cat 1</li>
+                    <li>Cat 2</li>
 
-        </ul>
-    </div>
+                </ul>
+            </div>
+        </div>
 
-    <div class="col-lg-4">
-        <ul>
-            <li>Brand 1</li>
-            <li>Brand 2</li>
-
-        </ul>
-    </div>
-
-
-</div>
-<div *ngIf="show == 'cat'" (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="row" style="padding:20px 10px;">
-    <div class="col-lg-4">
-        <ul>
-            <li>Cat 1</li>
-            <li>Cat 2</li>
-
-        </ul>
-    </div>
-    <div class="col-lg-4">
-        <ul>
-            <li>Cat 1</li>
-            <li>Cat 2</li>
-
-        </ul>
-    </div>
-    <div class="col-lg-4">
-        <ul>
-            <li>Cat 1</li>
-            <li>Cat 2</li>
-
-        </ul>
-    </div>
-
-    <div class="col-lg-4">
-        <ul>
-            <li>Cat 1</li>
-            <li>Cat 2</li>
-
-        </ul>
     </div>
 </div>
+<!--<div *ngIf="show == 'brand'" (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="row" style="padding:20px 10px;z-index:10">
+    <div class="col-lg-4">
+        <ul>
+            <li>Brand 1</li>
+            <li>Brand 2</li>
+
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <ul>
+            <li>Brand 1</li>
+            <li>Brand 2</li>
+
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <ul>
+            <li>Brand 1</li>
+            <li>Brand 2</li>
+
+        </ul>
+    </div>
+
+    <div class="col-lg-4">
+        <ul>
+            <li>Brand 1</li>
+            <li>Brand 2</li>
+
+        </ul>
+    </div>
+
+
+</div>-->
+<!--<div *ngIf="show == 'cat'" (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="row" style="padding:20px 10px;">
+    <div class="col-lg-4">
+        <ul>
+            <li>Cat 1</li>
+            <li>Cat 2</li>
+
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <ul>
+            <li>Cat 1</li>
+            <li>Cat 2</li>
+
+        </ul>
+    </div>
+    <div class="col-lg-4">
+        <ul>
+            <li>Cat 1</li>
+            <li>Cat 2</li>
+
+        </ul>
+    </div>
+
+    <div class="col-lg-4">
+        <ul>
+            <li>Cat 1</li>
+            <li>Cat 2</li>
+
+        </ul>
+    </div>
+</div>-->

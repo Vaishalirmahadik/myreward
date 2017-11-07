@@ -1,44 +1,21 @@
 <div class="row">
-    <div class="col-lg-3" [routerLink]=" ['/app/brandDetail-page'] ">
+    <div class="col-lg-3" *ngFor="let i of data1" [routerLink]=" ['/app/brandDetail-page'+i._id] ">
         <section class="widget" widget>
 
             <div class="widget-body">
-                Brand 1
+                {{i.name}}
             </div>
         </section>
     </div>
-    <div class="col-lg-3" [routerLink]=" ['/app/brandDetail-page'] ">
-        <section class="widget" widget>
 
-            <div class="widget-body">
-                Brand 2
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3" [routerLink]=" ['/app/brandDetail-page'] ">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                Brand 3
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3" [routerLink]=" ['/app/brandDetail-page'] ">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                Brand 4
-            </div>
-        </section>
-    </div>
 
 </div>
 <div class="row">
-    <div class="col-lg-3" [routerLink]=" ['/app/brandDetail-page'] ">
+    <div class="col-lg-3" *ngFor="let i of data2" [routerLink]=" ['/app/brandDetail-page'+i._id] ">
         <section class="widget" widget>
 
             <div class="widget-body">
-                Brand 5
+                {{i.name}}
             </div>
         </section>
     </div>
@@ -46,22 +23,6 @@
         <section class="widget" widget>
 
             <div class="widget-body">
-                Brand 6
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                Brand 7
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3" [routerLink]=" ['/app/allBrand-page'] ">
-        <section class="widget" widget>
-
-            <div [routerLink]=" ['/app/allBrand-page'] " class="widget-body">
                 View All
             </div>
         </section>
@@ -69,110 +30,39 @@
 
 </div>
 <div class="row">
-    <div class="col-lg-3">
+
+    <div *ngFor="let i of productList1" class="col-lg-3">
         <section class="widget" widget>
 
             <div class="widget-body">
-                <img class="back">
+                <img class="back" [src]="i.images[0]">
                 <br>
                 <br>
 
-                <p style="text-align:center"><b>Product Name</b></p>
+                <p style="text-align:center"><b>{{i.name}}</b></p>
                 <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
             Add to Cart
           </button>
             </div>
         </section>
     </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
 
-            <div class="widget-body">
-                <img class="back">
-                <br>
-                <br>
 
-                <p style="text-align:center"><b>Product Name</b></p>
-                <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
 
-            <div class="widget-body">
-                <img class="back">
-                <br>
-                <br>
-
-                <p style="text-align:center"><b>Product Name</b></p>
-                <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                <img class="back">
-                <br>
-                <br>
-
-                <p style="text-align:center"><b>Product Name</b></p>
-                <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-            </div>
-        </section>
-    </div>
 
 
 </div>
 
 <div class="row">
-    <div class="col-lg-3">
+    <div *ngFor="let i of productList2" class="col-lg-3">
         <section class="widget" widget>
 
             <div class="widget-body">
-                <img class="back">
+                <img class="back" [src]="i.images[0]">
                 <br>
                 <br>
 
-                <p style="text-align:center"><b>Product Name</b></p>
-                <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                <img class="back">
-                <br>
-                <br>
-
-                <p style="text-align:center"><b>Product Name</b></p>
-                <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-            </div>
-        </section>
-    </div>
-    <div class="col-lg-3">
-        <section class="widget" widget>
-
-            <div class="widget-body">
-                <img class="back">
-                <br>
-                <br>
-
-                <p style="text-align:center"><b>Product Name</b></p>
+                <p style="text-align:center"><b>{{i.name}}</b></p>
                 <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
             Add to Cart
           </button>

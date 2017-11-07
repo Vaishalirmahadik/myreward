@@ -4,7 +4,7 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule }  from '@angular/forms';
 // import { TooltipModule } from 'ngx-bootstrap';
-
+import {DatePickerModule} from 'ng2-datepicker-bootstrap';
 import { ROUTES }       from './layout.routes';
 import { AlertModule, TooltipModule } from 'ngx-bootstrap';
 import { ButtonsModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -28,7 +28,7 @@ import { DialogComponent } from './login/login.component';
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot()],
+    AccordionModule.forRoot(),DatePickerModule],
   declarations: [
     Layout,
     Sidebar,
