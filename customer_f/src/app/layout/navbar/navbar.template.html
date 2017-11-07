@@ -147,6 +147,9 @@
             <label class="btn btn-gray" btnRadio="otp" name='otp' [(ngModel)]="radioModel">
              Login With OTP
             </label>
+            <label class="btn btn-gray" btnRadio="register" name='register' [(ngModel)]="radioModel">
+             Register
+            </label>
         </div>
     </div>
 
@@ -182,6 +185,43 @@
                     <div style="    text-align: center;">
                         <button class="btn btn-primary" type="button">
               Get OTP 
+            </button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="widget-body" *ngIf="radioModel == 'register' ">
+                <form class="login-form mt-lg">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Gender">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Date of Birth">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="State">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Country">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Interests">
+                    </div>
+
+                    <div style="    text-align: center;">
+                        <button class="btn btn-primary" type="button">
+              Submit
             </button>
                     </div>
 
