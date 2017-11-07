@@ -3,30 +3,34 @@ const assert = require('assert');
 let Schema = null;
 
 function init() {
-    const ObjectId = Schema.Types.ObjectId;
-    const logs = new Schema({
-        previous: {},
+  const ObjectId = Schema.Types.ObjectId;
+  const logs = new Schema({
+    previous: {},
+  });
+  const brandSchema = new Schema(
+    {
+      name: { type: String },
+      status: { type: String },
+
+      description: { type: String },
+      images: [{ type: String }],
+      videos: [{ type: String }],
+      logoImg: { type: String },
+      category: [{ type: String }],
+      headquaters: { type: String },
+      fbLink: { type: String },
+      twitterLink: { type: String },
+      updatedBy: { type: ObjectId, ref: 'user' },
+      createdBy: { type: ObjectId, ref: 'user' },
+    },
+    { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
     });
-    const brandSchema = new Schema({
-        name: { type: String },
-        status: { type: String },
 
-        description: { type: String },
-        images: [{ type: String }],
-        videos: [{ type: String }],
-        logoImg: { type: String },
-        category: [{ type: String }],
-        headquaters: { type: String },
-        fbLink: { type: String },
-        twitterLink: { type: String },
-        updatedBy: { type: ObjectId, ref: 'user' }
-    }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } });
-
-    return brandSchema;
+  return brandSchema;
 }
 
-module.exports = (schema) => {
-    assert.ok(schema);
-    Schema = schema;
-    return init();
+module.exports = schema => {
+  assert.ok(schema);
+  Schema = schema;
+  return init();
 };

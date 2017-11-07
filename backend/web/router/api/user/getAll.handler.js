@@ -12,7 +12,7 @@ async function logic({ context, params }) {
         //     .limit(onPageResults)
         //     .exec();
 
-        const users = await User.find()
+        const users = await User.find();
 
         const totalResults = await User.count();
 
