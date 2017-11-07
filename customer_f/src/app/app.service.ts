@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Subject} from 'rxjs/Subject';
 
 export type InternalStateType = {
   [key: string]: any
@@ -7,8 +8,21 @@ export type InternalStateType = {
 @Injectable()
 export class AppState {
   _state: InternalStateType = { };
+  cart:any;
+  nameChange: Subject<string> = new Subject<string>();
 
   constructor() {
+
+    let ls:any = localStorage.getItem("cart");
+if(ls == null){
+
+  this.cart=0;
+
+}else{
+  ls = JSON.parse(ls);
+  this.cart = ls.length;
+  
+}
 
   }
 
@@ -32,6 +46,23 @@ export class AppState {
     // internally mutate our state
     return this._state[prop] = value;
   }
+setCart(){
+this.cart = this.cart+1;
+this.nameChange.next(this.cart);
+
+console.log("set set");
+}
+
+downCart(){
+  this.cart = this.cart-1;
+this.nameChange.next(this.cart);
+}
+
+getcart(){
+  return this.cart;
+}
+
+
 
 
   private _clone(object: InternalStateType) {

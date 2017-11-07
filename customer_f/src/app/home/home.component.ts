@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { AppState } from '../app.service';
 @Component({
   selector: 'home',
   templateUrl: './home.template.html',
@@ -13,16 +13,13 @@ data1:any;
 data2:any;
 productList1:any;
 productList2:any;
-
-constructor(private http:Http, private route: ActivatedRoute,router:Router){
-
+config:any;
+cart:any;
+constructor(private http:Http, private route: ActivatedRoute,router:Router,appState:AppState){
+this.config=appState;
    let headers = new Headers();
-
-       let options = new RequestOptions({ headers: headers });
-   
-    
-
-        this.http.get('http://localhost:4700/api/v1/brand/getAll',options)
+let options = new RequestOptions({ headers: headers });
+       this.http.get('http://localhost:4700/api/v1/brand/getAll',options)
         .map(res => res.json())
         .subscribe(result =>{
            console.log('res', result)
@@ -38,6 +35,8 @@ constructor(private http:Http, private route: ActivatedRoute,router:Router){
 }  
 
     ngOnInit() {
+
+      this.cart = this.config.getcart();
     // let id = this.route.snapshot.paramMap.get('id');
 
     // this.brandId = id;
@@ -89,6 +88,32 @@ constructor(private http:Http, private route: ActivatedRoute,router:Router){
         //    this.brandName = result.data.name;
       
         // })
+    }
+
+
+    addToCart(i){
+
+
+console.log(i); 
+let arr=[];
+
+let ls:any = localStorage.getItem("cart");
+if(ls == null){
+
+  arr.push(i);
+  localStorage.setItem("cart",JSON.stringify(arr));
+
+}else{
+  ls = JSON.parse(ls);
+  ls.push(i);
+  localStorage.setItem("cart",JSON.stringify(ls));
+  
+}
+console.log("ls",localStorage.getItem("cart"));
+this.config.setCart();
+
+
+
     }
 
 }

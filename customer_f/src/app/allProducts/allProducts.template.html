@@ -59,261 +59,29 @@
     <div class="col-lg-9">
 
         <div class="row">
-            <div class="col-lg-3">
+            <div *ngFor="let i of productList" class="col-lg-3">
                 <section class="widget" widget>
 
                     <div class="widget-body">
-                        <img class="back">
+                        <img [routerLink]=" ['/app/productDetail-page/'+i._id] " [src]="i.images[0]" class="back">
                         <br>
                         <br>
 
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
+                        <p style="text-align:center"><b>{{i.name}}</b></p>
+                        <p><small>{{i.brand.name}}</small></p>
+                        <button (click)="addToCart(i)" class="btn btn-success mb-xs" style="width: 100%;" role="button">
             Add to Cart
           </button>
                     </div>
                 </section>
             </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
 
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
 
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
 
 
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
 
 
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-
-
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-            <div class="col-lg-3">
-                <section class="widget" widget>
-
-                    <div class="widget-body">
-                        <img class="back">
-                        <br>
-                        <br>
-
-                        <p style="text-align:center"><b>Product Name</b></p>
-                        <button class="btn btn-success mb-xs" style="width: 100%;" role="button">
-            Add to Cart
-          </button>
-                    </div>
-                </section>
-            </div>
-
-
-        </div>
 
     </div>
 

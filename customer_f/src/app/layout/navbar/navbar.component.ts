@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, ElementRef, Output } from '@angular/core';
 import { AppConfig } from '../../app.config';
+import { AppState } from '../../app.service';
+
 declare let jQuery: any;
 // import { DatepickerOptions } from 'ng2-datepicker';
 
@@ -15,12 +17,19 @@ export class Navbar implements OnInit {
   show:any='';
   showDialog = false;
   radioModel = 'login';
-
-
-  constructor(el: ElementRef, config: AppConfig) {
+  cart:any;
+appState:any;
+_subscription:any;
+  constructor(el: ElementRef, config: AppConfig,appState:AppState) {
+    this.appState = appState;
     this.$el = jQuery(el.nativeElement);
     this.config = config.getConfig();
     console.log(this.radioModel);
+          this.cart = this.appState.getcart();
+          this._subscription = this.appState.nameChange.subscribe((value) => { 
+      this.cart = value; 
+    });
+
   }
 
   toggleSidebar(state): void {
@@ -33,9 +42,9 @@ export class Navbar implements OnInit {
 
   ngOnInit(): void {
 
-    this.deadlineinput = {
-        formatted: ''
-    };
+    // this.deadlineinput = {
+    //     formatted: ''
+    // };
     setTimeout(() => {
       let $chatNotification = jQuery('#chat-notification');
       $chatNotification.removeClass('hide').addClass('animated fadeIn')

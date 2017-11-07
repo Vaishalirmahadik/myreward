@@ -6,10 +6,10 @@ const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', loadChildren: '../home/home.module#HomeModule' },
    
-    { path: 'brandDetail-page' , loadChildren:'../brandDetail/brandDetail.module.ts#BrandDetailModule'},
+    { path: 'brandDetail-page/:id' , loadChildren:'../brandDetail/brandDetail.module.ts#BrandDetailModule'},
     { path: 'allBrand-page' ,loadChildren:'../allBrand/allBrand.module.ts#AllBrandModule'},
     { path: 'allProducts-page' , loadChildren:'../allProducts/allProducts.module.ts#AllProductsModule'},
-    { path:'productDetail-page', loadChildren:'../productDetails/productDetails.module.ts#ProductDetailModule'},
+    { path:'productDetail-page/:id', loadChildren:'../productDetails/productDetails.module.ts#ProductDetailModule'},
     {path: 'cart-page', loadChildren:"../cart/cart.module.ts#CartModule"},
     { path: 'account-page', loadChildren:'../account/account.module.ts#AccountModule'}
   ]}
