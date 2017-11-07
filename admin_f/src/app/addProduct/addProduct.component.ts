@@ -137,7 +137,9 @@ constructor(private route: ActivatedRoute,private http:Http){
 
         this.http.post('http://localhost:4700/api/v1/product/create', formData,options)
         .map(files => files.json())
-        .subscribe(files => console.log('files', files))
+        .subscribe(files => {
+          alert("Product Created");
+          console.log('files', files)})
 }
 
 fileChangeEvent(fileInput: any) {

@@ -92,7 +92,10 @@ constructor(private http:Http){
 
         this.http.post('http://localhost:4700/api/v1/brand/create', formData,options)
         .map(files => files.json())
-        .subscribe(files => console.log('files', files))
+        .subscribe(files => {
+          
+          alert("Brand Created");
+          console.log('files', files)})
 }
 
 fileChangeEvent(fileInput: any) {
