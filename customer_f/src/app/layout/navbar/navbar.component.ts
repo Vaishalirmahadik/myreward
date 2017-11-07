@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, ElementRef, Output } from '@angular/core';
 import { AppConfig } from '../../app.config';
 declare let jQuery: any;
+// import { DatepickerOptions } from 'ng2-datepicker';
 
 @Component({
   selector: '[navbar]',
@@ -14,6 +15,7 @@ export class Navbar implements OnInit {
   show:any='';
   showDialog = false;
   radioModel = 'login';
+
 
   constructor(el: ElementRef, config: AppConfig) {
     this.$el = jQuery(el.nativeElement);
@@ -30,6 +32,10 @@ export class Navbar implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.deadlineinput = {
+        formatted: ''
+    };
     setTimeout(() => {
       let $chatNotification = jQuery('#chat-notification');
       $chatNotification.removeClass('hide').addClass('animated fadeIn')
