@@ -13,13 +13,13 @@ async function logic({ context, params }) {
         //     .exec();
         if (params._id == "all") {
 
-            const products = await Product.find()
+            const products = await Product.find().populate('brand').exec()
 
             const totalResults = await Product.count();
             return { products, totalResults };
         } else {
 
-            const products = await Product.find({ brand: params._id })
+            const products = await Product.find({ brand: params._id }).populate('brand').exec()
 
             const totalResults = await Product.count({ brand: params._id });
             return { products, totalResults };
