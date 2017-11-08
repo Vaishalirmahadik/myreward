@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import {Http, Response,RequestOptions,Headers} from '@angular/http';
 
 export type InternalStateType = {
   [key: string]: any
@@ -11,7 +12,7 @@ export class AppState {
   cart:any;
   nameChange: Subject<string> = new Subject<string>();
 
-  constructor() {
+  constructor(private http:Http) {
 
     let ls:any = localStorage.getItem("cart");
 if(ls == null){
@@ -23,6 +24,13 @@ if(ls == null){
   this.cart = ls.length;
   
 }
+
+  }
+
+  getLocationInfo(){
+
+    return this.http.get('http://ipinfo.io/json')
+               .map(response => response.json());
 
   }
 

@@ -127,7 +127,7 @@
                         <div class="form-group row">
                             <label for="normal-field" class="col-md-4  col-form-label text-md-right">Survey Questions</label>
                             <div class="col-md-8" style="    display: flex;">
-                                <input type="text" name="survey" [(ngModel)]="survey" class="form-control" placeholder="Category Name">
+                                <input type="text" name="survey" [(ngModel)]="survey" class="form-control" placeholder="Survey Ques">
                                 <button (click)="addSurvey()" class="btn btn-primary mb-xs" role="button">
             Add
           </button>
@@ -146,7 +146,12 @@
                         <div class="form-group row">
                             <label for="normal-field" class="col-md-4  col-form-label text-md-right">Category</label>
                             <div class="col-md-8" style="    display: flex;">
-                                <input type="text" name="category" [(ngModel)]="category" class="form-control" placeholder="Category Name">
+                                <select name="category" [(ngModel)]="category">
+  <optgroup *ngFor="let i of inti" label="{{i.name}}">
+    <option  *ngFor="let ii of i.category" value="{{ii}}">{{ii}}</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+                               </select>
                                 <button (click)="addCategory()" class="btn btn-primary mb-xs" role="button">
             Add
           </button>

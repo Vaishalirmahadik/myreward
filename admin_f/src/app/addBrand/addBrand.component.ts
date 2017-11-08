@@ -20,6 +20,7 @@ headquaters:any;
 fbLink:any;
 linkedInLink:any;
 twitterLink:any;
+inti:any;
 
 
 
@@ -29,6 +30,19 @@ twitterLink:any;
 
 constructor(private http:Http){
      this.editorContent = 'My Document\'s Description'
+            let headers = new Headers();
+
+       let options = new RequestOptions({ headers: headers });
+   
+    
+
+        this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res', result)
+          this.inti = result.data.interests;
+
+        })
 
 }
      onChange(event: any) {

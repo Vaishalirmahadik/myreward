@@ -34,7 +34,7 @@ survey:any;
 surveyList:any=[];
 minAge:any;
 maxAge:any;
-
+init:any;
 
 
 
@@ -44,7 +44,19 @@ constructor(private route: ActivatedRoute,private http:Http){
          this.model = {
             sex: "both"
         };
+           let headers = new Headers();
+
+       let options = new RequestOptions({ headers: headers });
+   
     
+
+        this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res', result)
+          this.inti = result.data.interests;
+
+        })
 
 }
 

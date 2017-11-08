@@ -8,33 +8,26 @@
                 <br>
                 <br>
                 <legend>Brands</legend>
-                <div class="checkbox abc-checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label for="checkbox1">
-                    Brand 1
+                <div *ngFor="let i of allBrands">
+                    <input name="{{i.name}}" type="checkbox">
+                    <label>
+                    {{i.name}}
                   </label>
                 </div>
-                <div class="checkbox abc-checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label for="checkbox1">
-                    Brand 2
-                  </label>
-                </div>
+
                 <br>
                 <br>
                 <legend>
                     Categories</legend>
-                <div class="checkbox abc-checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label for="checkbox1">
-                    Category 1
+                <div *ngFor="let i of allInt">
+                    <p><b>{{i.name}}</b></p>
+                    <div *ngFor="let ii of i.category">
+                        <input name="{{ii}}" type="checkbox">
+                        <label>
+                    {{ii}}
                   </label>
-                </div>
-                <div class="checkbox abc-checkbox">
-                    <input id="checkbox1" type="checkbox">
-                    <label for="checkbox1">
-                    Category 2
-                  </label>
+                    </div>
+
                 </div>
                 <br>
                 <br>
@@ -49,7 +42,7 @@
                 <br>
                 <br>
                 <div style="text-align:center">
-                    <button class="btn btn-primary mb-xs" style="float:center;" role="button">
+                    <button class="btn btn-primary mb-xs" (click)="submit()" style="float:center;" role="button">
             Submit
           </button>
                 </div>

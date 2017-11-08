@@ -38,6 +38,8 @@ submit(){
         .subscribe(result => {
               console.log(result);
               alert("Interest Created");
+              this.categoryList=[];
+              this.name="";
         }
        )
 }

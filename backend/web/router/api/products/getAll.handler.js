@@ -3,7 +3,7 @@ const Product = rootRequire('models').Product;
 
 const { ValidationError } = rootRequire('commons').ERROR;
 
-async function logic({ context, params }) {
+async function logic({ context, params, query }) {
     try {
         // const pageNo = params.pageNo;
         // const onPageResults = 10;
@@ -11,7 +11,15 @@ async function logic({ context, params }) {
         // const products = await Product.find().skip(onPageResults * pageNo)
         //     .limit(onPageResults)
         //     .exec();
-        if (params._id == "all") {
+
+        console.log(params, query);
+        if (params._id == "some") {
+
+            const products = await Product.find({ $or: [{ category: { $in: query.category } }, { brand: { $in: query.brand } }] }).exec()
+            return { products };
+
+
+        } else if (params._id == "all") {
 
             const products = await Product.find().populate('brand').exec()
 

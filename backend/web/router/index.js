@@ -14,6 +14,8 @@ require('./api/user')(router);
 require('./api/brands')(router);
 require('./api/products')(router);
 require('./api/interests')(router);
+require('./api/customer')(router);
+
 
 
 

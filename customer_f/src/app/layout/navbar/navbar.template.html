@@ -130,7 +130,7 @@
     <div class="col-lg-2" style="    display: flex;
     align-items: center;
     justify-content: center;">
-        <button (click)="showDialog = !showDialog" class="btn btn-primary" type="button">
+        <button (click)="showD()" class="btn btn-primary" type="button">
               Login/SignUp 
             </button>
     </div>
@@ -153,10 +153,15 @@
         </div>
     </div>
 
-    <div class="row" style="display: flex;
+    <div class="row" style="    display: flex;
     align-items: center;
-    justify-content: center;">
-        <section class="widget widget-login animated fadeInUp">
+    justify-content: center;
+  ">
+        <section style="    overflow-y: scroll;
+    /* overflow-x: hidden; */
+    max-height: 500px;
+    height: 500px;
+    width: 90%;" class="widget widget-login animated fadeInUp">
 
             <div class="widget-body" *ngIf="radioModel == 'login' ">
                 <form class="login-form mt-lg">
@@ -196,36 +201,80 @@
 
                     <div class="form-group">
                         Name
-                        <input type="text" class="form-control" placeholder="Name">
+                        <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="name">
                     </div>
                     <div class="form-group">
+                        Email
 
-                        <input type="text" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" placeholder="Email" name="email" [(ngModel)]="email">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Gender">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Date of Birth">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="State">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="City">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Country">
-                    </div>
-                    <div class="form-group">
+                        Mobile No
 
-                        <input type="text" class="form-control" placeholder="Interests">
+                        <input type="text" class="form-control" placeholder="Mobile No" name="mobile_no" [(ngModel)]="mobile_no">
+                    </div>
+                    <div class="form-group">
+                        Password
+
+                        <input type="password" class="form-control" placeholder="" name="password" [(ngModel)]="password">
+                    </div>
+
+                    <div class="form-group">
+                        Gender
+                        <div class="form-group row">
+                            <!--<label for="normal-field" class="col-md-4  col-form-label text-md-right">Gender</label>-->
+                            <div style="padding-left: 20px;
+    padding-top: 10px;">
+                                <input type="radio" name="radio1" [(ngModel)]="model.sex" value="male" checked>
+                                <label for="radio1">
+                        Male
+                      </label>
+                                <input type="radio" name="radio1" [(ngModel)]="model.sex" value="female" checked>
+                                <label for="radio1">
+                        FeMale
+                      </label>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Date of Birth
+                        <input type="text" name="dob" [(ngModel)]="dob" class="form-control" placeholder="DD/MM/YYYY">
+                    </div>
+                    <div class="form-group">
+                        City
+                        <input type="text" name="city" [(ngModel)]="city" class="form-control" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        State
+                        <input type="text" name="state" [(ngModel)]="state" class="form-control" placeholder="State">
+                    </div>
+
+                    <div class="form-group">
+                        Country
+                        <input type="text" name="country" [(ngModel)]="country" class="form-control" placeholder="Country">
+                    </div>
+                    <div class="form-group" style="display: flex;">
+                        Interests
+                        <select name="int" [(ngModel)]="int">
+                            <option *ngFor="let i of data" value="{{i.name}}">{{i.name}}</option>
+                        </select>
+                        <button (click)="addInt()" class="btn btn-primary mb-xs" role="button">
+            Add
+          </button>
+                        <div>
+                            <ul>
+                                <li *ngFor="let i of intList">{{i}}</li>
+                            </ul>
+                        </div>
                     </div>
 
 
 
                     <div style="    text-align: center;">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="button" (click)="register()">
               Submit
             </button>
                     </div>
@@ -246,35 +295,14 @@
 
 
         <div *ngIf="show == 'brand'" (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="row" style="padding:20px 10px;z-index:10">
-            <div class="col-lg-4">
-                <ul>
-                    <li>Brand 1</li>
-                    <li>Brand 2</li>
+            <a class="col-lg-3" *ngFor="let i of data1" [routerLink]=" ['/app/brandDetail-page/'+i._id] ">
+                <!--<section class="widget" widget>-->
 
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <ul>
-                    <li>Brand 1</li>
-                    <li>Brand 2</li>
-
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <ul>
-                    <li>Brand 1</li>
-                    <li>Brand 2</li>
-
-                </ul>
-            </div>
-
-            <div class="col-lg-4">
-                <ul>
-                    <li>Brand 1</li>
-                    <li>Brand 2</li>
-
-                </ul>
-            </div>
+                <div>
+                    <b><i> {{i.name}}</i> </b>
+                </div>
+                <!--</section>-->
+            </a>
         </div>
 
     </div>
@@ -285,39 +313,18 @@
     justify-content: center;
     border-color: black;
     border-style: double;">
-        <h4>Categories</h4>
+        <h4>Interests</h4>
 
         <!--</div>-->
         <div *ngIf="show == 'cat'" (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="row" style="padding:20px 10px;">
-            <div class="col-lg-4">
-                <ul>
-                    <li>Cat 1</li>
-                    <li>Cat 2</li>
+            <a class="col-lg-3" *ngFor="let i of data" [routerLink]=" ['/app/brandDetail-page/'+i._id] ">
+                <!--<section class="widget" widget>-->
 
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <ul>
-                    <li>Cat 1</li>
-                    <li>Cat 2</li>
-
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <ul>
-                    <li>Cat 1</li>
-                    <li>Cat 2</li>
-
-                </ul>
-            </div>
-
-            <div class="col-lg-4">
-                <ul>
-                    <li>Cat 1</li>
-                    <li>Cat 2</li>
-
-                </ul>
-            </div>
+                <div>
+                    <b><i> {{i.name}}</i> </b>
+                </div>
+                <!--</section>-->
+            </a>
         </div>
 
     </div>

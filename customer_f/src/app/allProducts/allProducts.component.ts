@@ -15,6 +15,8 @@ export class AllProductsPage {
     productList:any;
     brandName:any;
     config:any;
+    allInt:any=[];
+    allBrands:any=[];
     constructor( private route: ActivatedRoute,private http:Http,appState:AppState){
       this.config = appState;
     }
@@ -42,6 +44,23 @@ export class AllProductsPage {
             })
           });
           // this.data = result.data.brands;
+
+        })
+
+          this.http.get('http://localhost:4700/api/v1/brand/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res brands', result)
+          this.allBrands = result.data.brands;
+          
+
+        })
+
+            this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res', result)
+          this.allInt = result.data.interests;
 
         })
 
@@ -77,6 +96,28 @@ console.log("ls",localStorage.getItem("cart"));
 this.config.setCart();
 
 
+
+    }
+
+    submit(){
+
+             let headers = new Headers();
+
+       let options = new RequestOptions({ headers: headers });
+   
+//     let params: URLSearchParams = new URLSearchParams();
+//  params.set('appid', "dd");
+//  params.set('cnt', "dsds");
+
+
+        this.http.get('http://localhost:4700/api/v1/product/getAll/'+"some",{params: {brand: ["5a01c78b584447d36380d24e"], category: ["sdsds","dfdf"]}})
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res products filter', result)
+         
+          // this.data = result.data.brands;
+
+        })
 
     }
 
