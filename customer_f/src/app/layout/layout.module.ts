@@ -18,7 +18,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { NotificationLoad } from './notifications/notifications-load.directive';
 import { Notifications } from './notifications/notifications.component';
 import { DialogComponent } from './login/login.component';
-
+import { AuthGuard } from './authGuard';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,7 +39,8 @@ import { DialogComponent } from './login/login.component';
     NotificationLoad,
     ChatMessage,
     DialogComponent
-  ]
+  ],
+  providers:[AuthGuard]
 })
 export class LayoutModule {
 }

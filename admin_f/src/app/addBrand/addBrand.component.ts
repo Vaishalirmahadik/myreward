@@ -36,11 +36,11 @@ constructor(private http:Http){
    
     
 
-        this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+        this.http.get('http://localhost:4700/api/v1/category/getAll',options)
         .map(res => res.json())
         .subscribe(result =>{
            console.log('res', result)
-          this.inti = result.data.interests;
+          this.inti = result.data.category;
 
         })
 

@@ -7,14 +7,16 @@ const Schema = mongoose.Schema;
 
 // loading all the models
 const Customer = mongoose.model(
-  'customer',
-  require('./customer.schema')(Schema));
+    'customer',
+    require('./customer.schema')(Schema));
 const Feedback = mongoose.model(
-  'feedbacks',
-  require('./feedbacks.schema')(Schema));
+    'feedbacks',
+    require('./feedbacks.schema')(Schema));
 const Interest = mongoose.model(
-  'interests',
-  require('./interestsSchema.schema')(Schema));
+    'interests',
+    require('./interestsSchema.schema')(Schema));
+const Category = mongoose.model('category', require('./category.schema')(Schema));
+
 const Brand = mongoose.model('brand', require('./brand.schema')(Schema));
 const Product = mongoose.model('product', require('./product.schema')(Schema));
 const Order = mongoose.model('orders', require('./orders.schema')(Schema));
@@ -22,13 +24,14 @@ const User = mongoose.model('user', require('./user.schema')(Schema));
 
 // registring models
 const model = {
-  Customer,
-  Feedback,
-  Interest,
-  Brand,
-  Product,
-  Order,
-  User,
+    Category,
+    Customer,
+    Feedback,
+    Interest,
+    Brand,
+    Product,
+    Order,
+    User,
 };
 
 module.exports = model;

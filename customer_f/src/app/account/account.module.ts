@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AccountPage } from './account.component.ts';
 // import { Widget } from '../layout/widget/widget.directive';
 import { DataTableModule } from 'angular2-datatable';
+import { DialogComponent } from './login/login.component';
 
 export const routes = [
   { path: '', component: AccountPage, pathMatch: 'full' }
@@ -20,7 +21,7 @@ export const routes = [
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     AccordionModule.forRoot()],
-  declarations: [ AccountPage ]
+  declarations: [ AccountPage,DialogComponent ]
 })
 export class AccountModule {
   static routes = routes;

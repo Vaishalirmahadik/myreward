@@ -1,59 +1,186 @@
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-10">
         <section class="widget" widget>
 
             <div class="widget-body">
                 <legend><b>Personal Information</b></legend>
                 <div class="form-group row">
                     <label class="col-md-4  col-form-label text-md-right" for="max-length">Name - </label>
-                    <div class="col-md-7 ">
-                        Sidharth Srivastava
+                    <div class="col-md-5 ">
+                        <span *ngIf="editName == false"> {{name}}</span>
+                        <span *ngIf="editName == true"><input type="text" class="form-control" [(ngModel)]="name" name="name" >
+</span>
                     </div>
-                    <button class="btn btn-primary mb-xs" role="button">
+                    <button *ngIf="editName == false" (click)="clickEditName()" class="btn btn-primary mb-xs" role="button">
             Edit
+          </button>
+                    <button *ngIf="editName == true" (click)="clickSave()" class="btn btn-primary mb-xs" role="button">
+            Save
+          </button>
+                    <button *ngIf="editName == true" (click)="clickEditName()" class="btn btn-primary mb-xs" role="button">
+            Cancel
           </button>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-4  col-form-label text-md-right" for="max-length">Mobile No. - </label>
-                    <div class="col-md-7 ">
-                        9730273887
+                    <div class="col-md-5 ">
+                        <span *ngIf="editMobile == false"> {{mobile_no}}</span>
+                        <span *ngIf="editMobile == true"><input type="text" class="form-control" [(ngModel)]="mobile_no" name="mobile_no" ></span>
                     </div>
-                    <button class="btn btn-primary mb-xs" role="button">
+                    <button *ngIf="editMobile == false" (click)="clickEditMobile()" class="btn btn-primary mb-xs" role="button">
             Edit
+          </button>
+                    <button *ngIf="editMobile == true" (click)="clickSave()" class="btn btn-primary mb-xs" role="button">
+            Save
+          </button>
+                    <button *ngIf="editMobile == true" (click)="clickEditMobile()" class="btn btn-primary mb-xs" role="button">
+            Cancel
           </button>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-4  col-form-label text-md-right" for="max-length">Email - </label>
-                    <div class="col-md-7 ">
-                        sid@gmail.com
+                    <div class="col-md-5 ">
+                        <span *ngIf="editEmail == false"> {{email}}</span>
+                        <span *ngIf="editEmail == true"><input type="text" class="form-control" [(ngModel)]="email" name="email" ></span>
                     </div>
-                    <button class="btn btn-primary mb-xs" role="button">
+                    <button *ngIf="editEmail == false" (click)="clickEditEmail()" class="btn btn-primary mb-xs" role="button">
             Edit
+          </button>
+                    <button *ngIf="editEmail == true" (click)="clickSave()" class="btn btn-primary mb-xs" role="button">
+            Save
+          </button>
+                    <button *ngIf="editEmail == true" (click)="clickEditEmail()" class="btn btn-primary mb-xs" role="button">
+            Cancel
           </button>
                 </div>
             </div>
 
         </section>
 
+        <!--name: { type: String },
+            mobile_no: { type: String },
+            address: { type: String },
+            near_by: { type: String },
+            pincode: { type: String },
+            state: { type: String },
+            city: { type: String },
+            country: { type: String },
+            address_type: { type: String },-->
+
 
         <section class="widget" widget>
+            <app-dialog [(visible)]="showDialog">
+
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Address Label </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="label" name="lable">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Name </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="nameAd" name="nameAd">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Mobile No. </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="mobile_noAd" name="mobile_noAd">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Address  </label>
+                    <div class="col-md-5 ">
+                        <textarea type="text" class="form-control" [(ngModel)]="address" name="address"></textarea>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Near By </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="near_by" name="near_by">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">Country </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="country" name="country">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">State</label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="state" name="state">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">City </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="city" name="city">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-4  col-form-label text-md-right" for="max-length">PinCode </label>
+                    <div class="col-md-5 ">
+                        <input type="text" class="form-control" [(ngModel)]="pincode" name="pincode">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    Address Type
+                    <div class="form-group row">
+                        <!--<label for="normal-field" class="col-md-4  col-form-label text-md-right">Gender</label>-->
+                        <div style="padding-left: 20px;
+    padding-top: 10px;">
+                            <input type="radio" name="radio1" [(ngModel)]="addressType" value="Home" checked>
+                            <label for="radio1">
+                        Home
+                      </label>
+                            <input type="radio" name="radio1" [(ngModel)]="addressType" value="Work" checked>
+                            <label for="radio1">
+                        Work
+                      </label>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div style="    text-align: center;">
+
+                    <button class="btn btn-primary" type="button" (click)="submitNewAddress()">
+              Submit
+            </button>
+                </div>
+
+            </app-dialog>
 
             <div class="widget-body">
-                <legend><b>Manage Address</b> <button class="btn btn-primary mb-xs" role="button">
+                <legend><b>Manage Address</b> <button (click)="addNewAddress()" class="btn btn-primary mb-xs" role="button">
             Add New
           </button></legend>
-                <div class="form-group row">
-                    <label class="col-md-2  col-form-label text-md-right" for="max-length">Sidharth Srivastava</label>
+
+
+                <div *ngFor="let i of addressess ; let a = index" class="form-group row">
+                    <!--<span class="help-block">erere</span>-->
+                    <label class="col-md-2  col-form-label text-md-right" for="max-length">{{i.lable}}</label>
                     <div class="col-md-7 ">
-                        9730273887
-                        <p> 2/295 vibhav khand , Gomyi Nagar, Lucknow, Uttar Pradesh- 2260101</p>
+                        <b>{{i.name}} - </b> {{i.mobile_no}}
+                        <p> {{address}}</p>
+                        <p>{{i.near_by}}, &nbsp; {{i.city}}&nbsp;,{{i.state}} - {{i.pincode}},&nbsp;{{i.country}}</p>
 
                     </div>
                     <div class="col-md-3 ">
-                        <button class="btn btn-primary mb-xs" role="button">
-            Edit
-          </button>
-                        <button class="btn btn-primary mb-xs" role="button">
+
+                        <button (click)="deleteAddress(i,a)" class="btn btn-primary mb-xs" role="button">
             Delete
           </button>
                     </div>
@@ -62,46 +189,7 @@
                     </div>
 
                 </div>
-                <div class="form-group row">
-                    <label class="col-md-2  col-form-label text-md-right" for="max-length">Sidharth Srivastava</label>
-                    <div class="col-md-7 ">
-                        9730273887
-                        <p> 2/295 vibhav khand , Gomyi Nagar, Lucknow, Uttar Pradesh- 2260101</p>
-
-                    </div>
-                    <div class="col-md-3 ">
-                        <button class="btn btn-primary mb-xs" role="button">
-            Edit
-          </button>
-                        <button class="btn btn-primary mb-xs" role="button">
-            Delete
-          </button>
-                    </div>
-                    <div>
-
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2  col-form-label text-md-right" for="max-length">Sidharth Srivastava</label>
-                    <div class="col-md-7 ">
-                        9730273887
-                        <p> 2/295 vibhav khand , Gomyi Nagar, Lucknow, Uttar Pradesh- 2260101</p>
-
-                    </div>
-                    <div class="col-md-3 ">
-                        <button class="btn btn-primary mb-xs" role="button">
-            Edit
-          </button>
-                        <button class="btn btn-primary mb-xs" role="button">
-            Delete
-          </button>
-                    </div>
-                    <div>
-
-                    </div>
-
-                </div>
+                <p *ngIf="addressess.length == 0"><i><b>No address Found</b></i></p>
 
             </div>
 

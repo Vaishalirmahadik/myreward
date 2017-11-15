@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, ElementRef, Output } from '@angular/co
 import { AppConfig } from '../../app.config';
 import { AppState } from '../../app.service';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
-
+import {AuthenticationService} from '../../services/authenticate.service'
 declare let jQuery: any;
 // import { DatepickerOptions } from 'ng2-datepicker';
 
@@ -27,8 +27,10 @@ export class Navbar implements OnInit {
   name:any;
   gender:any;
   dob:any;
+  username:any;
   mobile_no:any;
   password:any;
+  input:any;
   intList:any=[];
 appState:any;
 data1:any;
@@ -36,33 +38,37 @@ data2:any;
 data:any;
 _subscription:any;
 model:any;
-  constructor(el: ElementRef, config: AppConfig,appState:AppState,private http:Http) {
+count:any=0;
+loginStatus:any=false;
+// login:any=false;
+
+wizard:any;
+  constructor(el: ElementRef, config: AppConfig,appState:AppState,private http:Http,private authenticationService: AuthenticationService) {
      this.model = {
             sex: "both"
         };
+
+        this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
     this.appState = appState;
     this.$el = jQuery(el.nativeElement);
     this.config = config.getConfig();
     console.log(this.radioModel);
-          this.cart = this.appState.getcart();
-          this._subscription = this.appState.nameChange.subscribe((value) => { 
-      this.cart = value; 
+    this.cart = this.appState.getcart();
+    this._subscription = this.appState.nameChange.subscribe((value) => { 
+        this.cart = value; 
     });
-               this.getLocationInfo().subscribe((r) =>{
-console.log(r);
-this.state = r.region;
-this.city = r.city;
-this.country = "India";
+          this.getLocationInfo().subscribe((r) =>{
+                    console.log(r);
+                    this.state = r.region;
+                    this.city = r.city;
+                    this.country = "India";
 
-       }
-              , (error) => {
-                console.log("err",error)
-                
-
-                //this.helperService.presentToast('Invalid Email or Password');
-              }
-              , () => { }
-            );
+          }
+        , (error) => {
+          console.log("err",error)
+        }
+        , () => { }
+      );
 
    this.config=appState;
    let headers = new Headers();
@@ -77,15 +83,37 @@ this.country = "India";
         .map(res => res.json())
         .subscribe(result =>{
            console.log('res', result)
+          // this.intList = result.data.interests;
           this.data = result.data.interests;
 
         })
+        let ls = localStorage.getItem("currentUser");
+        console.log("ls ls ",ls);
+        if(ls != null){
+          this.loginStatus = true;
+            this.username = (JSON.parse(ls)).name;
+          console.log("name",(JSON.parse(ls)).name);
+        }else{
+          this.loginStatus = false;
+        
+        }
         
 
   }
 
   showD(){
     this.showDialog = !this.showDialog;
+        this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
+     this.country="";
+      this.state="";
+     this. city="";
+      this.email="";
+      this.name="";
+      // this.gender="";
+      this.dob="";
+      this.mobile_no="";
+      this.password="";
+      this.count =0;
     // this.state ="dsdad";
   }
 
@@ -152,7 +180,7 @@ this.country = "India";
       password:this.password,
       email:this.email,
       mobile_no:this.mobile_no,
-      gender:this.gender,
+      gender:this.model.sex,
       interests:this.intList,
       dob:this.dob,
       state:this.state,
@@ -162,14 +190,104 @@ this.country = "India";
     };
        let headers = new Headers();
 let options = new RequestOptions({ headers: headers });
-       this.http.post('http://localhost:4700/api/v1/customer/create',data,options)
+      return this.http.post('http://localhost:4700/api/v1/customer/create',data,options)
         .map(res => res.json())
-        .subscribe(result =>{
-           console.log('res', result);
-           this.showDialog = !this.showDialog;
-           alert("Registration successful");
        
+  }
+
+  nextWizard(){
+if(this.count == 0){
+this.count = this.count +1;
+this.wizard[0].active =false;
+this.wizard[1].active =true;
+
+  
+}else{
+
+  if(this.count == 4){
+
+    this.register().subscribe(result =>{
+           console.log('res', result);
+          //  this.showDialog = !this.showDialog;
+          //  alert("Registration successful");
+         this.count = this.count +1;
+         this.wizard[this.count -1 ].active =false;
+         this.wizard[this.count].active =true;
 
         })
+
+
+        }else{
+
+    
+        this.count = this.count +1;
+        this.wizard[this.count -1 ].active =false;
+        this.wizard[this.count].active =true;
+
   }
+
+
+}
+
+
+
+
+}
+
+activate(i,event){
+  console.log(this.intList);
+  // this.active = !this.notActive;
+if(i.active == true){
+
+
+jQuery(event.target).css('background-color',"white");
+ i.active = false;
+
+ this.intList.find((x,index) =>{ 
+   console.log(index);
+ this.intList.splice(index,1);
+   
+   });
+//  this.intList.splice(,1);
+
+
+}else{
+jQuery(event.target).css('background-color',"lightgrey");
+ i.active = true;
+  this.intList.push(i);
+
+}
+
+  
+  console.log(this.intList);
+
+}
+
+    login() {
+        // this.loading = true;
+        console.log(this.input,this.password);
+        this.authenticationService.login(this.input, this.password)
+            .subscribe(result => {
+              console.log(result,"res");
+                if (result.success === true) {
+                    // login successful
+                   console.log("login sucewss");
+                   this.showDialog = !this.showDialog;
+                   this.loginStatus = true;
+                   this.username = result.user.name;
+                } else {
+                    // login failed
+                   console.log("login not sucewss");
+                 
+                }
+            });
+    }
+
+    logout(){
+
+        this.authenticationService.logout();
+        this.loginStatus = false;
+
+    }
+
 }

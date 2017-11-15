@@ -72,8 +72,8 @@
                             <div class="col-md-8" style="    display: flex;">
                                 <select name="category" [(ngModel)]="category">
   <optgroup *ngFor="let i of inti" label="{{i.name}}">
-    <option  *ngFor="let ii of i.category" value="{{ii}}">{{ii}}</option>
-    <option value="saab">Saab</option>
+    <option  *ngFor="let ii of i.sub_category" value="{{ii.name}}">{{ii.name}}</option>
+    <!--<option value="saab">Saab</option>-->
   </optgroup>
                                </select>
                                 <button (click)="addCategory()" class="btn btn-primary mb-xs" role="button">
