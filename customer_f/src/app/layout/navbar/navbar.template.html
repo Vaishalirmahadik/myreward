@@ -31,7 +31,8 @@
               Login/SignUp 
             </button>
         <button *ngIf="loginStatus == true" [routerLink]=" ['/app/account-page'] " class="btn btn-primary" type="button">
-{{username}}<span style="    color: white;" class="help-block">(Account Info)</span>
+{{username}}
+<!--<span style="    color: white;" class="help-block">(Account Info)</span>-->
             </button>
 
 
@@ -203,19 +204,21 @@ Logout            </button>
 </app-dialog>
 <div class="row">
     <div (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="col-lg-6" style="border-width: thin;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+     display: block;
+  
     border-color: black;
     border-style: double;">
-        <h4>Brands</h4>
+        <div style="    text-align: center;
+    width: 100%;
+    display: block;"><span class="badge badge-success" style="font-size: x-large;
+    font-weight: 200;">Brands</span></div>
 
 
-        <div *ngIf="show == 'brand'" (mouseenter)="mouseEnter('brand') " (mouseleave)="mouseLeave('brand')" class="row" style="padding:20px 10px;z-index:10">
+        <div *ngIf="show == 'brand' || show == 'cat' " class="row" style="display :flex;justify-content: space-around;">
             <a class="col-lg-3" *ngFor="let i of data1" [routerLink]=" ['/app/brandDetail-page/'+i._id] ">
                 <!--<section class="widget" widget>-->
 
-                <div>
+                <div lass="badge badge-default">
                     <b><i> {{i.name}}</i> </b>
                 </div>
                 <!--</section>-->
@@ -225,23 +228,28 @@ Logout            </button>
     </div>
 
     <div (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="col-lg-6" style="border-width: thin;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+  
     border-color: black;
     border-style: double;">
-        <h4>Interests</h4>
+        <div style="    text-align: center;
+    width: 100%;
+    display: block;"><span class="badge badge-success" style="font-size: x-large;
+    font-weight: 200;">Categories</span></div>
 
         <!--</div>-->
-        <div *ngIf="show == 'cat'" (mouseenter)="mouseEnter('cat') " (mouseleave)="mouseLeave('cat')" class="row" style="padding:20px 10px;">
-            <a class="col-lg-3" *ngFor="let i of data" [routerLink]=" ['/app/brandDetail-page/'+i._id] ">
-                <!--<section class="widget" widget>-->
+        <div class="row" *ngIf="show == 'cat' || show == 'brand'" style="display :flex;justify-content: space-around;">
+            <div class="col-lg-3" *ngFor="let i of data">
+
 
                 <div>
                     <b><i> {{i.name}}</i> </b>
                 </div>
-                <!--</section>-->
-            </a>
+                <div *ngFor="let x of i.sub_category">
+                    <a [routerLink]=" ['/app/allProducts-page']" [queryParams]="{category: x.name}">{{x.name}}</a>
+                </div>
+
+            </div>
         </div>
 
     </div>

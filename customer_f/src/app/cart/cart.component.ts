@@ -28,16 +28,17 @@ addressSelected:any;
   constructor(private http:Http, private route: ActivatedRoute,router:Router,appState:AppState){
 this.config=appState;
     // let arr=[];
-
 let ls:any = localStorage.getItem("cart");
 if(ls != null){
   ls = JSON.parse(ls);
   this.cartList = ls;
 
 }
+console.log("cart",this.cartList);
+
 console.log("ls",JSON.parse(localStorage.getItem("cart")));
 
- let lss:any = localStorage.getItem("currentUser");
+      let lss:any = localStorage.getItem("currentUser");
       lss=JSON.parse(lss);
       console.log("account ----- ",lss);
       if(ls != null){
@@ -58,20 +59,26 @@ console.log("ls",JSON.parse(localStorage.getItem("cart")));
   }
 
   remove(i){
+    console.log(i);
+    this.cartList.splice(i,1);
+            this.config.downCart();
+
+    localStorage.setItem("cart",JSON.stringify(this.cartList));
+
     // this.cartList =  this.cartList.splice(i,1);
-    let ls:any = localStorage.getItem("cart");
-    console.log(i,ls);
+    // let ls:any = localStorage.getItem("cart");
+    // console.log(i,ls);
     
-if(ls != null){
-  ls = JSON.parse(ls);
-  // this.cartList = ls;
-ls = ls.splice(i,1);
-localStorage.setItem("cart",JSON.stringify(ls));
-this.config.downCart();
-   this.cartList =  this.cartList.splice(i,1);
+    //   if(ls != null){
+    //     ls = JSON.parse(ls);
+    //     ls = ls.splice(i,1);
+    //     console.log("after remove",ls,i);
+    //     localStorage.setItem("cart",JSON.stringify(ls));
+    //     this.config.downCart();
+    //     this.cartList =  this.cartList.splice(i,1);
 
 
-}
+    //   }
   }
 
   submitNewAddress(){
@@ -123,7 +130,7 @@ this.config.downCart();
           customer:lss._id,
           products:this.cartList,
           date_of_order:Date.now(),
-          status:"Order Placed",
+          status:"Order Recieved",
           address:this.addressess.find(item => item._id == this.addressSelected)
         },options)
         .map(res => res.json())
@@ -132,7 +139,7 @@ this.config.downCart();
            alert("order place success");
           //  this.cartList=[];
           
-           this.addressess = result.data.addressess
+          //  this.addressess = result.data.addressess
         })
 
    }

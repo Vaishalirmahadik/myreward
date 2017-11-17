@@ -20,7 +20,7 @@ fbLink:any;
 linkedInLink:any;
 twitterLink:any;
 activeImg:any;
-
+_id:any;
 constructor(private route: ActivatedRoute,private http:Http){
 
 }
@@ -50,7 +50,7 @@ ngOnInit() {
            this.images = result.data.images;
            this.headquaters = result.data.headquaters;
            this.linkedInLink = result.data.linkedInLink;
-
+this._id = result.data._id;
            this.images = this.images.map(i =>{
              return "http://localhost:4700"+i.slice(i.indexOf("/"))
            })

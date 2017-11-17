@@ -4,9 +4,9 @@ const updateHandler = require('./update.handler');
 
 module.exports = (router) => {
 
-    router.get('/order/getAll/:pageNo', getAllHandler);
-    router.get('/order/get', getHandler);
-    router.get('/order/update', updateHandler);
+    router.get('/orderadmin//getAll/:pageNo', getAllHandler);
+    router.get('/order/admin/get', getHandler);
+    router.get('/order/admin/update', updateHandler);
 
 
 };

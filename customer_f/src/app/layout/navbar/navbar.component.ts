@@ -79,12 +79,12 @@ wizard:any;
            console.log('res', result)
           this.data1 = result.data.brands;
         })
-          this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+          this.http.get('http://localhost:4700/api/v1/category/getAll',options)
         .map(res => res.json())
         .subscribe(result =>{
            console.log('res', result)
           // this.intList = result.data.interests;
-          this.data = result.data.interests;
+          this.data = result.data.category;
 
         })
         let ls = localStorage.getItem("currentUser");

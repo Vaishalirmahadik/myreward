@@ -9,7 +9,7 @@
                 <br>
                 <legend>Brands</legend>
                 <div *ngFor="let i of allBrands">
-                    <input name="{{i.name}}" type="checkbox">
+                    <input name="{{i.name}}" type="checkbox" [(ngModel)]="i.checked" [value]="i.name">
                     <label>
                     {{i.name}}
                   </label>
@@ -21,10 +21,10 @@
                     Categories</legend>
                 <div *ngFor="let i of allInt">
                     <p><b>{{i.name}}</b></p>
-                    <div *ngFor="let ii of i.category">
-                        <input name="{{ii}}" type="checkbox">
+                    <div *ngFor="let ii of i.sub_category">
+                        <input name="{{ii.name}}" type="checkbox" [(ngModel)]="ii.checked" [value]="ii.name">
                         <label>
-                    {{ii}}
+                    {{ii.name}}
                   </label>
                     </div>
 
@@ -71,6 +71,12 @@
 
 
 
+            <div *ngIf=" productList == undefined || productList.length == 0  " class="col-lg-9">
+                <section class="widget" widget>
+                    No Products Found
+                </section>
+
+            </div>
 
         </div>
 

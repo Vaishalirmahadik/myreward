@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'brandDetail',
   templateUrl: './brandDetail.template.html',
@@ -20,7 +22,9 @@ fbLink:any;
 linkedInLink:any;
 twitterLink:any;
 activeImg:any;
-constructor( private route: ActivatedRoute,private http:Http){
+showVideo:any=false;
+videoUrl:any;
+constructor( private route: ActivatedRoute,private http:Http,public sanitizer: DomSanitizer){
     //  this.editorContent = 'My Document\'s Description'
 
 }
@@ -61,6 +65,13 @@ constructor( private route: ActivatedRoute,private http:Http){
   selectActiveImg(i){
 
     this.activeImg = i;
+    this.showVideo = false;
+
+  }
+  showVid(i){
+
+    this.showVideo = true;
+    this.videoUrl = "https://www.youtube.com/embed/"+i;
 
   }
 

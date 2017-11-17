@@ -4,7 +4,7 @@ const getHandler = require('./get.handler');
 const craeteHandler = require('./create.handler');
 module.exports = (router) => {
 
-    router.get('/order/getAll/:pageNo', getAllHandler);
+    router.get('/order/getAll', getAllHandler);
     router.get('/order/get', getHandler);
     // router.post('/order/update', updateHandler);
     router.post('/order/create', craeteHandler);

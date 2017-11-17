@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'productDetails',
@@ -36,13 +37,16 @@ images:any;
 activeImg:any;
 gender:any;
 brandName:any;
-constructor(private route: ActivatedRoute,private http:Http){
+showVideo:any=false;
+videoUrl:any;
+constructor(private route: ActivatedRoute,private http:Http,public sanitizer: DomSanitizer){
      this.editorContent = 'My Document\'s Description'
 
 }
   selectActiveImg(i){
 
     this.activeImg = i;
+    this.showVideo = false;
 
   }
 
@@ -86,6 +90,13 @@ ngOnInit() {
           // this.data = result.data.brands;
 
         })
+  }
+
+  showVid(i){
+
+    this.showVideo = true;
+    this.videoUrl = "https://www.youtube.com/embed/"+i;
+
   }
 
 }

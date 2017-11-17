@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
 import { AppState } from '../app.service';
+// import {DomSanitizationService} from '@angular/platform-browser';
 
 @Component({
   selector: 'productDetail',

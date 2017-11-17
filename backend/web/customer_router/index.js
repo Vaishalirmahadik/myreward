@@ -13,6 +13,7 @@ requestLogger(router);
 
 require('./api/customer')(router);
 require('./api/orders')(router);
+require('./api/feedbacks')(router);
 
 
 

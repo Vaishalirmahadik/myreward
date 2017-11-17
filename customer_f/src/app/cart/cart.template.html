@@ -28,7 +28,7 @@
         </section>
 
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4" *ngIf="cartList.length > 0">
         <section class="widget" widget>
 
             <div class="widget-body">
@@ -133,7 +133,7 @@
             </app-dialog>
 
             <div class="widget-body">
-                <legend><b>Manage Address</b> <button style="    float: right;
+                <legend><b>Select Address</b> <button style="    float: right;
     height: 30px;" (click)="addNewAddress()" class="btn btn-primary mb-xs" role="button">
             Add New
           </button></legend>
@@ -158,7 +158,7 @@
                     </div>
 
                 </div>
-                <p *ngIf="addressess.length == 0"><i><b>No address Found</b></i></p>
+                <p *ngIf="addressess == undefined || addressess.length == 0 "><i><b>No address Found</b></i></p>
 
             </div>
 
@@ -166,3 +166,10 @@
 
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-8">
+        <section *ngIf="cartList.length == 0" class="widget" widget>
+            <b><i>  No Product in Cart</i></b>
+        </section>
+
+    </div>

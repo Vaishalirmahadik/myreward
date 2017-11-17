@@ -35,15 +35,20 @@ surveyList:any=[];
 minAge:any;
 maxAge:any;
 init:any;
-
-
-
-
-constructor(private route: ActivatedRoute,private http:Http){
+wizard:any=[];
+count:any=0;
+surveyType:any="descriptive";
+noOpt:any=true;
+optionList:any=[];
+option:any;
+// id:any;
+constructor(private route: ActivatedRoute,private http:Http,private router:Router){
      this.editorContent = 'My Document\'s Description'
          this.model = {
             sex: "both"
         };
+
+        this.wizard=[{active:true},{active:false},{active:false},{active:false},{active:false}];
            let headers = new Headers();
 
        let options = new RequestOptions({ headers: headers });
@@ -92,9 +97,17 @@ constructor(private route: ActivatedRoute,private http:Http){
   addLocation(){
      this.locationList.push(this.location);
   }
-  addSurvey(){
-     this.surveyList.push(this.survey);
+  addOption(){
+     this.optionList.push({o:this.option});
     
+  }
+
+  addSurvey(){
+    this.surveyList.push({
+      ques:{q:this.survey},
+      options:this.optionList,
+      typeO:{t:this.surveyType}
+    });
   }
   sub(){
       console.log(this.editorContent);
@@ -151,6 +164,8 @@ constructor(private route: ActivatedRoute,private http:Http){
         .map(files => files.json())
         .subscribe(files => {
           alert("Product Created");
+         this.router.navigate(['/app/products-page/'+this.brandId]);
+
           console.log('files', files)})
 }
 
@@ -160,5 +175,55 @@ fileChangeEvent(fileInput: any) {
     
     // this.showFileNames = files;
     //this.product.photo = fileInput.target.files[0]['name'];
+}
+
+nextWizard(){
+if(this.count == 0){
+this.count = this.count +1;
+this.wizard[0].active =false;
+this.wizard[1].active =true;
+
+  
+}else{
+
+  if(this.count == 4){
+alert("post dtaa");
+    // this.register().subscribe(result =>{
+    //        console.log('res', result);
+    //       //  this.showDialog = !this.showDialog;
+    //       //  alert("Registration successful");
+    //      this.count = this.count +1;
+    //      this.wizard[this.count -1 ].active =false;
+    //      this.wizard[this.count].active =true;
+
+    //     })
+
+
+        }else{
+
+    
+        this.count = this.count +1;
+        this.wizard[this.count -1 ].active =false;
+        this.wizard[this.count].active =true;
+
+  }
+
+
+}
+
+
+
+
+}
+
+changeSurveyType(){
+  this.survey = "";
+  this.optionList = [];
+  this.option = "";
+  if(this.surveyType == "descriptive"){
+    this.noOpt = true;
+  }else{
+    this.noOpt = false;
+  }
 }
 }

@@ -9,7 +9,7 @@ function init() {
     });
     const ordersSchema = new Schema({
         customer: { type: ObjectId, ref: 'customer' },
-        products: [{ type: ObjectId, ref: 'products' }],
+        products: [{ type: ObjectId, ref: 'product' }],
         date_of_order: { type: Date, required: true },
         status: { type: String, required: true },
         updatedBy: { type: ObjectId, ref: 'customer' },

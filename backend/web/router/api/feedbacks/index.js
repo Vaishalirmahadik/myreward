@@ -3,8 +3,8 @@ const getHandler = require('./get.handler');
 
 module.exports = (router) => {
 
-    router.get('/feedback/getAll/:pageNo', getAllHandler);
-    router.get('/feedback/get', getHandler);
+    router.get('/feedback/admin/getAll', getAllHandler);
+    router.get('/feedback/admin/get', getHandler);
 
 
 };

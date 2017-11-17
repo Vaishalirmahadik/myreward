@@ -14,8 +14,25 @@ async function logic({ context, params, query }) {
 
         console.log(params, query);
         if (params._id == "some") {
+            let products;
+            if (query.category != undefined || query.brand != undefined) {
+                if (!(query.category instanceof Array)) {
+                    query.category = [query.category];
+                } else if (!(query.brand instanceof Array)) {
+                    query.brand = [query.brand];
+                }
+            }
+            if (query.category == undefined && query.brand != undefined) {
+                products = await Product.find({ $or: [{ brand: { $in: query.brand } }] }).populate('brand').exec()
 
-            const products = await Product.find({ $or: [{ category: { $in: query.category } }, { brand: { $in: query.brand } }] }).exec()
+            } else if (query.brand == undefined && query.category != undefined) {
+                products = await Product.find({ $or: [{ category: { $in: query.category } }] }).populate('brand').exec()
+
+            } else {
+                products = await Product.find({ $or: [{ category: { $in: query.category } }, { brand: { $in: query.brand } }] }).populate('brand').exec()
+
+            }
+
             return { products };
 
 

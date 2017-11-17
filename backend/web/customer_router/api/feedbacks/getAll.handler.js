@@ -5,13 +5,10 @@ const { ValidationError } = rootRequire('commons').ERROR;
 
 async function logic({ context, params }) {
     try {
-        const pageNo = params.pageNo;
-        const onPageResults = 10;
+        // const pageNo = params.pageNo;
+        // const onPageResults = 10;
 
-        const feedbacks = await Feedback.find().skip(onPageResults * pageNo)
-            .limit(onPageResults)
-            .exec();
-
+        const feedbacks = await Feedback.find().populate('customer').populate('order').populate('product').exec()
         const totalResults = await Feedback.count({});
 
         return { feedbacks, totalResults };
