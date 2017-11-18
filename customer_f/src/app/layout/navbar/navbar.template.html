@@ -1,9 +1,9 @@
 <div class="row" style="padding: 20px 10px;">
-    <div class="col-lg-2" style="    display: flex;
+    <a class="col-lg-2" style="    display: flex;
     align-items: center;
     justify-content: center;">
         <h2 [routerLink]=" ['/app/home'] ">tryy</h2>
-    </div>
+    </a>
     <div class="col-lg-6" style="    display: flex;
     align-items: center;
     justify-content: center;">
@@ -208,10 +208,10 @@ Logout            </button>
   
     border-color: black;
     border-style: double;">
-        <div style="    text-align: center;
+        <a [routerLink]=" ['/app/allBrand-page'] " style="    text-align: center;
     width: 100%;
     display: block;"><span class="badge badge-success" style="font-size: x-large;
-    font-weight: 200;">Brands</span></div>
+    font-weight: 200;">Brands</span></a>
 
 
         <div *ngIf="show == 'brand' || show == 'cat' " class="row" style="display :flex;justify-content: space-around;">
@@ -232,10 +232,10 @@ Logout            </button>
   
     border-color: black;
     border-style: double;">
-        <div style="    text-align: center;
+        <a [routerLink]=" ['/app/allCategory-page'] " style="    text-align: center;
     width: 100%;
     display: block;"><span class="badge badge-success" style="font-size: x-large;
-    font-weight: 200;">Categories</span></div>
+    font-weight: 200;">Categories</span></a>
 
         <!--</div>-->
         <div class="row" *ngIf="show == 'cat' || show == 'brand'" style="display :flex;justify-content: space-around;">

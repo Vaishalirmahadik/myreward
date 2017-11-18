@@ -12,8 +12,12 @@ async function logic({ context, params, query }) {
         //     .limit(onPageResults)
         //     .exec();
 
-        console.log(params, query);
-        if (params._id == "some") {
+        console.log(params, query.search);
+        if (params._id == "search") {
+            const products = await Product.find({ $or: [{ "name": { "$regex": query.search, "$options": "i" } }] }).exec()
+            return { products };
+
+        } else if (params._id == "some") {
 
             const products = await Product.find({ $or: [{ category: { $in: query.category } }, { brand: { $in: query.brand } }] }).exec()
             return { products };

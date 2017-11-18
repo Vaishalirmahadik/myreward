@@ -59,12 +59,17 @@ function init() {
     }, {
         timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
     });
+    // productSchema.index({ '$**': 'text' });
+    // productSchema.index({ name: 'text', 'name': 'text' });
+    // productSchema.index({ name: 'text', 'category': 'text' });
+
 
     return productSchema;
 }
 
 module.exports = schema => {
     assert.ok(schema);
+
     Schema = schema;
     return init();
 };
