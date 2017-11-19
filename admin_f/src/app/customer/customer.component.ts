@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
-const PEOPLE = [
-  {
-   
-    'name': 'ABC xxc',
-    'email':'sid.srib@gmail.com',
-    'mobileNo':"343322123",
-    'gender':'Male'
-    
-  },
-  {
-   
-    'name': 'ABC xxc',
-    'email':'sid.srib@gmail.com',
-    'mobileNo':"343322123",
-    'gender':'Male'
-    
-  }
-  
-];
+import {Http, Response,RequestOptions,Headers} from '@angular/http';
+import { ActivatedRoute,Router } from '@angular/router';
 @Component({
   selector: 'customer',
   templateUrl: './customer.template.html'
 })
 export class CustomerPage {
-    data: any[] = PEOPLE;
+      data: any[] ;
+
+    constructor(private http:Http, private route: ActivatedRoute,router:Router){
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+        this.http.get('http://localhost:4700/api/v1/customer/admin/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res orders', result)
+          this.data = result.data.customers;
+         })
+
+         
 
 }
+
+
+}
+
+

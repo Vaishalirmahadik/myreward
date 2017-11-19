@@ -36,12 +36,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let person of mf.data">
-                        <td><span class="fw-semi-bold">{{person.orderid}}</span></td>
+                    <tr *ngFor="let i of mf.data">
+                        <td><span class="fw-semi-bold">{{i._id}}</span></td>
 
-                        <td class="hidden-sm-down">{{person.productName}}</td>
-                        <td class="hidden-sm-down">{{person.status}}</td>
-                        <td class="hidden-sm-down">{{person.dateOfOrder}}</td>
+                        <td class="hidden-sm-down"><span class="badge badge-primary" *ngFor="let p of i.products">{{p.name}}</span></td>
+                        <td class="hidden-sm-down">{{i.status}}</td>
+                        <td class="hidden-sm-down">{{i.date_of_order | date : "medium"}}</td>
 
                     </tr>
                     <tr *ngIf="mf.data.length === 0">

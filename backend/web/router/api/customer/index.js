@@ -5,7 +5,7 @@ const loginHandler = require('./login.handler');
 
 module.exports = (router) => {
 
-    router.get('/customer/admin/getAll/:pageNo', getAllHandler);
+    router.get('/customer/admin/getAll', getAllHandler);
     router.get('/customer/admin/get', getHandler);
     router.post('/customer/admin/create', createHandler);
     router.post('/customer/admin/login', loginHandler);

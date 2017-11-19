@@ -26,23 +26,21 @@
                             <mfDefaultSorter>Product Name</mfDefaultSorter>
                         </th>
                         <th class="no-sort hidden-sm-down">
-                            <mfDefaultSorter>Email</mfDefaultSorter>
+                            <mfDefaultSorter>Given BY</mfDefaultSorter>
                         </th>
                         <th class="no-sort hidden-sm-down">
-                            <mfDefaultSorter>Mobile No</mfDefaultSorter>
+                            <mfDefaultSorter>Order Id</mfDefaultSorter>
                         </th>
-                        <th class="no-sort hidden-sm-down">
-                            <mfDefaultSorter>Type</mfDefaultSorter>
-                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let person of mf.data">
+                    <tr *ngFor="let i of mf.data">
 
-                        <td class="hidden-sm-down">{{person.productName}}</td>
-                        <td class="hidden-sm-down">{{person.email}}</td>
-                        <td class="hidden-sm-down">{{person.mobileNo}}</td>
-                        <td><span class="fw-semi-bold">{{person.type}}</span></td>
+                        <td class="hidden-sm-down"><span class="badge badge-primary" *ngFor="let p of i.product ">{{p.name}}</span></td>
+                        <td class="hidden-sm-down">{{i.customer.name}}</td>
+                        <td class="hidden-sm-down">{{i.order._id}}</td>
+                        <!--<td><span class="fw-semi-bold">{{person.type}}</span></td>-->
 
 
                     </tr>

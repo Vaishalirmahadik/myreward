@@ -1,29 +1,27 @@
 import { Component } from '@angular/core';
-const PEOPLE = [
-  {
-   
-    'productName': 'A',
-    'email':'sid@gamil.com',
-    'mobileNo':"9882273899",
-    'type':'Video'
-    
-  },
-  {
-   
-  
-    'productName': 'B',
-    'email':'sid@gamil.com',
-    'mobileNo':"9882273899",
-    'type':'Video'
-    
-  }
-  
-];
+import {Http, Response,RequestOptions,Headers} from '@angular/http';
+import { ActivatedRoute,Router } from '@angular/router';
+
 @Component({
   selector: 'feedbacks',
   templateUrl: './feedbacks.template.html'
 })
 export class FeedbacksPage {
-    data: any[] = PEOPLE;
+        data: any[] ;
+
+    constructor(private http:Http, private route: ActivatedRoute,router:Router){
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+        this.http.get('http://localhost:4700/api/v1/feedback/admin/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res feedbacks', result)
+          this.data = result.data.feedbacks;
+         })
+
+         
+
+}
+
 
 }
