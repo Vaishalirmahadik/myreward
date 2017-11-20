@@ -40,6 +40,7 @@ _subscription:any;
 model:any;
 count:any=0;
 loginStatus:any=false;
+interestsData:any=[];
 // login:any=false;
 
 wizard:any;
@@ -87,6 +88,15 @@ wizard:any;
           this.data = result.data.category;
 
         })
+            this.http.get('http://localhost:4700/api/v1/interest/getAll',options)
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res', result)
+          // this.intList = result.data.interests;
+          this.interestsData = result.data.interests;
+
+        })
+        
         let ls = localStorage.getItem("currentUser");
         console.log("ls ls ",ls);
         if(ls != null){

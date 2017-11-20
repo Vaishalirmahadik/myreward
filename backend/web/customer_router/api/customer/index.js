@@ -8,7 +8,7 @@ module.exports = (router) => {
 
     // router.get('/customer/getAll/:pageNo', getAllHandler);
     router.get('/customer/get/:id', getHandler);
-    // router.post('/customer/create', createHandler);
+    router.post('/customer/create', createHandler);
     router.post('/customer/login', loginHandler);
     // router.post('/customer/login', loginHandler);
     router.post('/customer/update', updateHandler);

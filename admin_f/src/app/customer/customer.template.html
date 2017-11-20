@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let i of mf.data">
+                    <tr *ngFor="let i of mf.data" [routerLink]=" ['/app/customerDetails-page/'+i._id]">
                         <td><span class="fw-semi-bold">{{i.name}}</span></td>
 
                         <td class="hidden-sm-down">{{i.email}}</td>
