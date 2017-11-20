@@ -3,9 +3,9 @@ const Feedback = rootRequire('models').Feedback;
 
 const { ValidationError } = rootRequire('commons').ERROR;
 
-async function logic({ context, body }) {
+async function logic({ context, params }) {
     try {
-        const feedback = await Feedback.find({ _id: body._id });
+        const feedback = await Feedback.findOne({ _id: params.id }).populate('customer').populate('order').populate('product').populate('feedBack_given.product').exec();
         if (!feedback) throw new ValidationError('Feedback Details do not exist');
         return feedback;
     } catch (e) {

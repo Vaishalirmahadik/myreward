@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let i of mf.data">
+                    <tr [routerLink]=" ['/app/feedbackDetails-page/'+i._id]" *ngFor="let i of mf.data">
 
                         <td class="hidden-sm-down"><span class="badge badge-primary" *ngFor="let p of i.product ">{{p.name}}</span></td>
                         <td class="hidden-sm-down">{{i.customer.name}}</td>
