@@ -17,7 +17,8 @@ const routes: Routes = [
     {path:'products-page/:id',loadChildren:'../products/products.module.ts#ProductsModule'},
     {path:'addInterest-page',loadChildren:'../addInterest/addInterest.module.ts#AddInterestModule'},
     { path:'customerDetails-page/:id', loadChildren:'../customerDetails/customerDetails.module.ts#CustomerDetailsModule'},
-    {path:'feedbackDetails-page/:id', loadChildren:'../feedbackDetails/feedbackDetails.module.ts#FeedbackDetailsModule'}
+    {path:'feedbackDetails-page/:id', loadChildren:'../feedbackDetails/feedbackDetails.module.ts#FeedbackDetailsModule'},
+    {path:'orderDetails-page/:id',loadChildren:'../orderDetails/orderDetails.module.ts#OrderDetailsModule'}
 
     
   ]}

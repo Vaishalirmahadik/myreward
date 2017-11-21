@@ -3,9 +3,9 @@ const Order = rootRequire('models').Order;
 
 const { ValidationError } = rootRequire('commons').ERROR;
 
-async function logic({ context, body }) {
+async function logic({ context, params }) {
     try {
-        const order = await Order.find({ _id: body._id });
+        const order = await Order.findOne({ _id: params.id }).populate('products').populate('customer').exec();
         if (!order) throw new ValidationError('order Details do not exist');
         return order;
     } catch (e) {
@@ -24,8 +24,6 @@ function handler(req, res, next) {
             });
         })
         .catch(err => next(err));
-
-
 
 }
 module.exports = handler;

@@ -22,6 +22,15 @@ export class FeedbackDetailsPage  {
            console.log('res feedback', result)
            this.show= true;
           this.feedback = result.data;
+
+          this.feedback.feedBack_given.forEach((element,index1) => {
+
+            element.fileUrls.forEach((item,index2) => {
+              
+              this.feedback.feedBack_given[index1].fileUrls[index2] = "http://localhost:4700"+item.slice(item.indexOf("/"))
+            });
+            
+          });
          })
 
          

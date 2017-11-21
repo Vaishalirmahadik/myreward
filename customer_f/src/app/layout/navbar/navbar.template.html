@@ -215,10 +215,10 @@ Logout            </button>
 
 
         <div *ngIf="show == 'brand' || show == 'cat' " class="row" style="display :flex;justify-content: space-around;">
-            <a class="col-lg-3" *ngFor="let i of data1" [routerLink]=" ['/app/brandDetail-page/'+i._id] ">
+            <a class="col-lg-3" *ngFor="let i of data1" [routerLink]=" ['/app/brandDetail-page/'+i._id] " style="margin:10px;">
                 <!--<section class="widget" widget>-->
 
-                <div lass="badge badge-default">
+                <div class="badge badge-primary">
                     <b><i> {{i.name}}</i> </b>
                 </div>
                 <!--</section>-->
@@ -242,11 +242,13 @@ Logout            </button>
             <div class="col-lg-3" *ngFor="let i of data">
 
 
-                <div>
+                <div class="badge badge-default" style="margin:10px">
                     <b><i> {{i.name}}</i> </b>
                 </div>
                 <div *ngFor="let x of i.sub_category">
-                    <a [routerLink]=" ['/app/allProducts-page']" [queryParams]="{category: x.name}">{{x.name}}</a>
+                    <a style="margin:5px" [routerLink]=" ['/app/allProducts-page']" [queryParams]="{category: x.name}">
+                        <span class="badge badge-danger">{{x.name}}</span>
+                    </a>
                 </div>
 
             </div>

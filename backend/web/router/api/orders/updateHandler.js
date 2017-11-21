@@ -1,19 +1,21 @@
 const Joi = require('joi');
 const Order = rootRequire('models').Order;
+const Feedback = rootRequire('models').Feedback;
 
 const { ValidationError } = rootRequire('commons').ERROR;
 
 async function logic({ body, context }) {
     try {
         // const brandObj = enrichBrandObj(body, context);
-        const order = await Order.findOne({ _id: body._id });
+        const order = await Order.update({ _id: body._id }, { status: body.status });
         if (!order) throw new ValidationError('No order Error');
+        if (body.status == 'Delivered') {
+            const feedback = await Feedback.update({ order: body._id }, { isDelivered: true });
+            if (!feedback) throw new ValidationError('No feedback Error');
+        }
 
-        order.status = body.status;
 
-
-        let orderObj = new Order(order);
-        return await orderObj.save();
+        return order;
 
     } catch (e) {
         logger.error(e);

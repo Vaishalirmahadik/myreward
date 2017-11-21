@@ -8,8 +8,11 @@
         <button style="float: right;    margin: 5px;" [routerLink]=" ['/app/addBrand-page'] " class="btn btn-inverse width-100 mb-xs float-r" role="button">
            Edit
           </button>
-        <button style="float: right;    margin: 5px;" [routerLink]=" ['/app/addBrand-page'] " class="btn btn-inverse width-100 mb-xs float-r" role="button">
-            Activate
+        <button *ngIf="is_active != true" style="float: right;    margin: 5px;" (click)="activate()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Enable
+          </button>
+        <button *ngIf="is_active == true" style="float: right;    margin: 5px;" (click)="activate()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Disable
           </button>
     </p>
 </div>

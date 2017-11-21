@@ -79,10 +79,8 @@
 
                             <div class="form-group row">
                                 <label for="normal-field" class="col-md-4  col-form-label text-md-right">Sub Category</label>
-                                <div class="col-md-6" style="    max-height: 200px;
-    overflow-y: scroll;
-    width: 100%;">
-                                    <input type="text" [(ngModel)]="subCategory" name="subCategory" class="form-control" placeholder="Category Name">
+                                <div class="col-md-6" style="display: flex;">
+                                    <input type="text" [(ngModel)]="subCategory" name="subCategory" class="form-control" placeholder="Sub Category Name">
 
                                     <button (click)="addSubCategory()" class="btn btn-default mb-xs" role="button">Add</button>
 

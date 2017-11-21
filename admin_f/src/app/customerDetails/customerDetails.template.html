@@ -1,4 +1,17 @@
 <div *ngIf="show == true" class="row">
+    <h1 class="page-title col-lg-6"> <small><small></small></small>
+    </h1>
+    <p class="col-lg-6">
+
+        <button *ngIf="customer.is_active != true" style="float: right;    margin: 5px;" (click)="activateUser()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Enable
+          </button>
+        <button *ngIf="customer.is_active == true" style="float: right;    margin: 5px;" (click)="activateUser()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Disable
+          </button>
+    </p>
+</div>
+<div *ngIf="show == true" class="row">
     <div class="col-lg-6">
         <section class="widget" widget>
 

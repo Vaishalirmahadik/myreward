@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
-
+import { ActivatedRoute,Router } from '@angular/router';
 @Component({
   selector: 'addBrand',
   templateUrl: './addBrand.template.html',
@@ -21,22 +21,21 @@ fbLink:any;
 linkedInLink:any;
 twitterLink:any;
 inti:any;
+count:any=0;
+
+wizard:any=[];
 
 
 
 
 
+constructor(private route: ActivatedRoute,private http:Http,private router:Router){
+    //  this.editorContent = 'My Document\'s Description'
 
-
-constructor(private http:Http){
-     this.editorContent = 'My Document\'s Description'
-            let headers = new Headers();
-
+    this.wizard = [{active:true},{active:false},{active:false}];
+           let headers = new Headers();
        let options = new RequestOptions({ headers: headers });
-   
-    
-
-        this.http.get('http://localhost:4700/api/v1/category/getAll',options)
+       this.http.get('http://localhost:4700/api/v1/category/getAll',options)
         .map(res => res.json())
         .subscribe(result =>{
            console.log('res', result)
@@ -71,6 +70,44 @@ constructor(private http:Http){
   sub(){
       console.log(this.editorContent);
   }
+  nextWizard(){
+if(this.count == 0){
+this.count = this.count +1;
+this.wizard[0].active =false;
+this.wizard[1].active =true;
+
+  
+}else{
+
+  if(this.count == 4){
+alert("post dtaa");
+    // this.register().subscribe(result =>{
+    //        console.log('res', result);
+    //       //  this.showDialog = !this.showDialog;
+    //       //  alert("Registration successful");
+    //      this.count = this.count +1;
+    //      this.wizard[this.count -1 ].active =false;
+    //      this.wizard[this.count].active =true;
+
+    //     })
+
+
+        }else{
+
+    
+        this.count = this.count +1;
+        this.wizard[this.count -1 ].active =false;
+        this.wizard[this.count].active =true;
+
+  }
+
+
+}
+
+
+
+
+}
 
   upload() {
     const formData: any = new FormData();
@@ -109,6 +146,8 @@ constructor(private http:Http){
         .subscribe(files => {
           
           alert("Brand Created");
+                   this.router.navigate(['/app/dashboard']);
+
           console.log('files', files)})
 }
 

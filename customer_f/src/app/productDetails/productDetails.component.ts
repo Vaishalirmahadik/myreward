@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
 import { AppState } from '../app.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
 // import {DomSanitizationService} from '@angular/platform-browser';
 
 @Component({
@@ -41,14 +43,23 @@ gender:any;
 brandName:any;
 config:any;
 gi:any;
-constructor(private route: ActivatedRoute,private http:Http,appState:AppState){
+showVideo:any=false;
+videoUrl:any;
+constructor(private route: ActivatedRoute,private http:Http,appState:AppState,public sanitizer: DomSanitizer){
      this.editorContent = 'My Document\'s Description';
      this.config=appState;
 
 }
-  selectActiveImg(i){
+   selectActiveImg(i){
 
     this.activeImg = i;
+    this.showVideo = false;
+
+  }
+  showVid(i){
+
+    this.showVideo = true;
+    this.videoUrl = "https://www.youtube.com/embed/"+i;
 
   }
 

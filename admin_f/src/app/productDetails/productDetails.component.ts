@@ -39,6 +39,7 @@ gender:any;
 brandName:any;
 showVideo:any=false;
 videoUrl:any;
+is_active:any=true;
 constructor(private route: ActivatedRoute,private http:Http,public sanitizer: DomSanitizer){
      this.editorContent = 'My Document\'s Description'
 
@@ -79,6 +80,7 @@ ngOnInit() {
            this.location = result.data.target_audience.location;
            this.gender=result.data.target_audience.gender;
            this.brandName = result.data.brand.name;
+           this.is_active = result.data.is_active;
 //            this.permonthperuser= result.data.rules.permonthperuser;
 // this.perweekperuser= result.data.rules.perweekperuser;
 // this.perdayperuser= result.data.rules.perdayperuser;
@@ -97,6 +99,9 @@ ngOnInit() {
     this.showVideo = true;
     this.videoUrl = "https://www.youtube.com/embed/"+i;
 
+  }
+    activate(){
+    this.is_active = !this.is_active;
   }
 
 }

@@ -24,6 +24,7 @@ twitterLink:any;
 activeImg:any;
 showVideo:any=false;
 videoUrl:any;
+is_active:any=true;
 constructor( private route: ActivatedRoute,private http:Http,public sanitizer: DomSanitizer){
     //  this.editorContent = 'My Document\'s Description'
 
@@ -53,7 +54,7 @@ constructor( private route: ActivatedRoute,private http:Http,public sanitizer: D
            this.images = result.data.images;
            this.headquaters = result.data.headquaters;
            this.linkedInLink = result.data.linkedInLink;
-
+this.is_active = result.data.is_active;
            this.images = this.images.map(i =>{
              return "http://localhost:4700"+i.slice(i.indexOf("/"))
            })
@@ -73,6 +74,9 @@ constructor( private route: ActivatedRoute,private http:Http,public sanitizer: D
     this.showVideo = true;
     this.videoUrl = "https://www.youtube.com/embed/"+i;
 
+  }
+  activate(){
+    this.is_active = !this.is_active;
   }
 
 }

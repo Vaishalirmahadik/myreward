@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <section class="widget" widget>
 
             <div class="widget-body">
@@ -253,8 +253,8 @@
                 </div>-->
 
                 <div *ngFor="let i of feedbackList" class="form-group row">
-                    <label class="col-md-4 col-form-label text-md-right" for="max-length"><span class="badge badge-default" *ngFor="let p of i.product">{{p.name}}</span></label>
-                    <div class="col-md-6 ">
+                    <label class="col-md-3 col-form-label text-md-right" for="max-length"><span class="badge badge-default" *ngFor="let p of i.product">{{p.name}}</span></label>
+                    <div class="col-md-5 ">
                         <p> <b>Order Id:</b> <span class="badge badge-primary"><i>{{i.order._id}}</i></span></p>
                         <p><b> Delivery Status: </b><span class="badge badge-primary"><i>{{i.order.status}}</i></span></p>
                         <p><b> FeedBack Status: </b><span class="badge badge-primary"><i>{{i.status}}</i></span></p>
@@ -266,7 +266,8 @@
                     </div>
 
 
-                    <div class="col-md-2">
+                    <div class="col-md-4" style="    display: grid;
+">
                         <button style="padding: 2px 5px;" *ngFor="let a of i.product" [disabled]="!i.isDelivered" (click)="showFeedBackDialog(a,i)" class="btn btn-primary mb-xs" role="button">
             Give FeedBack for {{" "+a.name}}
           </button>

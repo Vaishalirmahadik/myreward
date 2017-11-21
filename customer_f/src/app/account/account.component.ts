@@ -224,10 +224,11 @@ clickSave(){
         this.http.post('http://localhost:4700/api/v1/feedback/update', formData,options)
         .map(files => files.json())
         .subscribe(files => {
+          this.showDialogFeedBack  != this.showDialogFeedBack;
+          alert("feedback submitted");
 
           console.log('files', files)})
-          this.showDialogFeedBack  != this.showDialogFeedBack;
-          alert("feedback given");
+          
           
 
     

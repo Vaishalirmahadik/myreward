@@ -6,8 +6,11 @@
         <button [routerLink]=" ['/app/addProduct-page/'+ productId] " class="btn btn-inverse width-100 mb-xs float-r" style="float: right;    margin: 5px;" role="button">
            Edit
           </button>
-        <button style="float: right;    margin: 5px;" class="btn btn-inverse width-100 mb-xs float-r" role="button">
-            Activate
+        <button *ngIf="is_active != true" style="float: right;    margin: 5px;" (click)="activate()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Enable
+          </button>
+        <button *ngIf="is_active == true" style="float: right;    margin: 5px;" (click)="activate()" class="btn btn-inverse width-100 mb-xs float-r" role="button">
+            Disable
           </button>
     </p>
 </div>
@@ -55,7 +58,35 @@
                 <legend>Facebook Page Link</legend>
                 <p>{{fbLink}}</p>
                 <legend>Survey Questions</legend>
-                <p>{{survey}}</p>
+                <div class="form-group row">
+                    <!--<label class="col-md-4  col-form-label text-md-right" for="max-length">Survey Questions-->
+                    <!--- </label>-->
+                    <div class="col-md-5 ">
+                        <div *ngFor="let p of survey">
+
+                            <p style="
+    display: grid;
+" *ngIf="p.typeO.t == 'descriptive'">
+                                <span class="badge badge-primary">Question{{" - "+p.ques.q}} </span>
+                                <span> 
+                            <span class="badge badge-danger">Question Type {{" - "+p.typeO.t}}</span>
+                                </span>
+                            </p>
+                            <p style="
+    display: grid;
+" *ngIf="p.typeO.t == 'singlechoice' || p.typeO.t == 'multiplechoice' ">
+                                <span class="badge badge-primary">Question{{"- "+p.ques.q}} </span>
+                                <span class="badge badge-danger">Question Type {{" - "+p.typeO.t}}</span>
+
+                                <!--<span >-->
+                                <span *ngFor="let o of p.options" class="badge badge-danger">{{o.o}}</span>
+                                <!--</span>-->
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
 
 
                 <br>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import {Http, Response,RequestOptions,Headers} from '@angular/http';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'brandDetail',
   templateUrl: './brandDetail.template.html',
@@ -21,7 +23,9 @@ linkedInLink:any;
 twitterLink:any;
 activeImg:any;
 _id:any;
-constructor(private route: ActivatedRoute,private http:Http){
+showVideo:any=false;
+videoUrl:any;
+constructor(private route: ActivatedRoute,private http:Http,public sanitizer: DomSanitizer){
 
 }
 
@@ -62,6 +66,14 @@ this._id = result.data._id;
   selectActiveImg(i){
 
     this.activeImg = i;
+        this.showVideo = false;
+
+
+  }
+  showVid(i){
+
+    this.showVideo = true;
+    this.videoUrl = "https://www.youtube.com/embed/"+i;
 
   }
 }

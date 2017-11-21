@@ -29,7 +29,7 @@ function init() {
 
         }],
         rating: { type: String },
-        status: { type: String },
+        is_active: { type: Boolean },
         target_audience: {
             age: {
                 min: {
