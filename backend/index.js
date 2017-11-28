@@ -1,16 +1,16 @@
 // set environment variables first
-// require("appdynamics").profile({
-//     controllerHostName: 'city2017112619545017.saas.appdynamics.com',
-//     controllerPort: 443,
+require("appdynamics").profile({
+    controllerHostName: 'city2017112619545017.saas.appdynamics.com',
+    controllerPort: 443,
 
-//     // If SSL, be sure to enable the next line
-//     controllerSslEnabled: true,
-//     accountName: 'city2017112619545017',
-//     accountAccessKey: 'red9qsrc32l3',
-//     applicationName: 'newBrand',
-//     tierName: 'BrandTouch',
-//     nodeName: 'process' // The controller will automatically append the node name with a unique number
-// });
+    // If SSL, be sure to enable the next line
+    controllerSslEnabled: true,
+    accountName: 'city2017112619545017',
+    accountAccessKey: 'red9qsrc32l3',
+    applicationName: 'newBrand',
+    tierName: 'BrandTouch',
+    nodeName: 'process' // The controller will automatically append the node name with a unique number
+});
 require('./envVars');
 
 // set globals

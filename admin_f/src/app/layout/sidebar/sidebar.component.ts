@@ -2,7 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppConfig } from '../../app.config';
+import {AuthenticationService} from '../../services/authenticate.service'
 declare let jQuery: any;
+
 
 @Component({
   selector: '[sidebar]',
@@ -15,7 +17,7 @@ export class Sidebar implements OnInit {
   router: Router;
   location: Location;
 
-  constructor(config: AppConfig, el: ElementRef, router: Router, location: Location) {
+  constructor(config: AppConfig, el: ElementRef, router: Router, location: Location, private authenticationService:AuthenticationService) {
     this.$el = jQuery(el.nativeElement);
     this.config = config.getConfig();
     this.router = router;
@@ -66,4 +68,12 @@ export class Sidebar implements OnInit {
       }
     });
   }
+
+  logout(){
+
+        this.authenticationService.logout();
+  
+        // this.loginStatus = false;
+
+    }
 }

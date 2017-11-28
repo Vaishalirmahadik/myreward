@@ -5,6 +5,6 @@ const loginHandler = require('./login.handler');
 module.exports = (router) => {
     router.post('/user/create', createHandler);
     router.get('/user/getAll', getAllHandler);
-    router.get('/user/login', getAllHandler);
+    router.post('/user/login', loginHandler);
 
 };

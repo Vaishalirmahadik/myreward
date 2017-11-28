@@ -388,7 +388,7 @@ jQuery(event.target).css('background-color',"lightgrey");
         // this.loading = true;
        if(model2 == true || model1== true){
            this.inputerror = true;
-        this.passerror = true;
+           this.passerror = true;
        }else{
 
               console.log(this.input,this.password);

@@ -22,7 +22,7 @@ async function logic({ body, context }) {
             return { success: false, login: false, msg: "Invalid Mobile No/ Email  or Password" };
         } else {
 
-            if (user.password == user.password) {
+            if (user.password == body.password) {
 
                 const payloads = {
                     exp: config.jwtExpiry,
