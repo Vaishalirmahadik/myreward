@@ -30,7 +30,7 @@ export class Navbar implements OnInit {
   username:any;
   mobile_no:any;
   password:any;
-  input:any;
+  input:any="";
   intList:any=[];
 appState:any;
 data1:any;
@@ -41,15 +41,32 @@ model:any;
 count:any=0;
 loginStatus:any=false;
 interestsData:any=[];
+otpR:any="";
+resendOtp:any=false;
+mobile_noL:any;
+otpL:any
+validation:any={
+  name:false,
+  email:false,
+  pass:false,
+  mobile_no:false,
+  otp:false,
+  dobFormat:false,
+  dob:false
+};
+inputerror:any=false;
+passerror:any=false;
+model1:any;
+model2:any;
 // login:any=false;
 
 wizard:any;
   constructor(el: ElementRef, config: AppConfig,appState:AppState,private http:Http,private authenticationService: AuthenticationService) {
      this.model = {
-            sex: "both"
+            sex: "male"
         };
 
-        this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
+        this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
     this.appState = appState;
     this.$el = jQuery(el.nativeElement);
     this.config = config.getConfig();
@@ -58,18 +75,7 @@ wizard:any;
     this._subscription = this.appState.nameChange.subscribe((value) => { 
         this.cart = value; 
     });
-          this.getLocationInfo().subscribe((r) =>{
-                    console.log(r);
-                    this.state = r.region;
-                    this.city = r.city;
-                    this.country = "India";
-
-          }
-        , (error) => {
-          console.log("err",error)
-        }
-        , () => { }
-      );
+       
 
    this.config=appState;
    let headers = new Headers();
@@ -113,7 +119,8 @@ wizard:any;
 
   showD(){
     this.showDialog = !this.showDialog;
-        this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
+            this.wizard = [{ active : true},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false},{ active : false}];
+
      this.country="";
       this.state="";
      this. city="";
@@ -139,6 +146,8 @@ wizard:any;
   }
 
   ngOnInit(): void {
+    jQuery('.parsleyjs').parsley();
+    
 
     // this.deadlineinput = {
     //     formatted: ''
@@ -206,15 +215,39 @@ let options = new RequestOptions({ headers: headers });
   }
 
   nextWizard(){
+    // console.log(name,email,pass);
 if(this.count == 0){
+  if(this.name.length != 0 && this.email.length != 0 && this.password.length != 0){
 this.count = this.count +1;
 this.wizard[0].active =false;
 this.wizard[1].active =true;
+  }else{
+    if(this.name.length == 0){
+      this.validation.name = true;
+    }else{
+      this.validation.name = false;
+      
+    }
+     if(this.email.length == 0){
+      this.validation.email = true;
+    }else{
+      this.validation.email = false;
+      
+    }
+     if(this.password.length == 0){
+      this.validation.pass = true;
+    }else{
+      this.validation.pass = false;
+      
+    }
+
+  }
+
 
   
 }else{
 
-  if(this.count == 4){
+  if(this.count == 5){
 
     this.register().subscribe(result =>{
            console.log('res', result);
@@ -227,7 +260,85 @@ this.wizard[1].active =true;
         })
 
 
-        }else{
+      }else if(this.count == 1){
+
+        if(this.mobile_no.length == 0){
+      this.validation.mobile_no = true;
+    }else{
+      this.validation.mobile_no = false;
+       this.requestOtp().subscribe(result =>{
+
+            this.count = this.count +1;
+         this.wizard[this.count -1 ].active =false;
+         this.wizard[this.count].active =true;
+        })
+      
+    }
+        
+       
+
+      }else if(this.count == 2){
+         if(this.otpR.length == 0){
+      this.validation.otp = true;
+    }else{
+
+      this.validation.otp = false;
+       this.verifyOtp().subscribe(result =>{
+           if(result.data.otp == false){
+             alert("otp do not match");
+           }else{
+
+             this.count = this.count +1;
+         this.wizard[this.count -1 ].active =false;
+         this.wizard[this.count].active =true;
+
+           }
+
+            
+        })
+      
+    }
+        
+        
+
+        }else if(this.count == 3){
+          if(this.dob.length == 0){
+            this.validation.dob = true;
+          }else{
+            this.validation.dob = false;
+            
+          }
+          if(this.dob.split('/')[0] > 12){
+             this.validation.dobFormat = true;
+
+          }else{
+             this.validation.dobFormat = false;
+
+          }
+          if(this.validation.dobFormat == false && this.validation.dob == false){
+                  this.count = this.count +1;
+        this.wizard[this.count -1 ].active =false;
+        this.wizard[this.count].active =true;  
+              this.getLocationInfo().subscribe((r) =>{
+                    console.log(r);
+                    this.state = r.region;
+                    this.city = r.city;
+                    this.country = "India";
+                  
+
+          }
+        , (error) => {
+          console.log("err",error)
+        }
+        , () => { }
+      );
+          }
+
+        }
+        // else if(this.count == 4){
+       
+        // }
+         else{
 
     
         this.count = this.count +1;
@@ -273,9 +384,14 @@ jQuery(event.target).css('background-color',"lightgrey");
 
 }
 
-    login() {
+    login(model2,model1) {
         // this.loading = true;
-        console.log(this.input,this.password);
+       if(model2 == true || model1== true){
+           this.inputerror = true;
+        this.passerror = true;
+       }else{
+
+              console.log(this.input,this.password);
         this.authenticationService.login(this.input, this.password)
             .subscribe(result => {
               console.log(result,"res");
@@ -287,10 +403,34 @@ jQuery(event.target).css('background-color',"lightgrey");
                    this.username = result.user.name;
                 } else {
                     // login failed
-                   console.log("login not sucewss");
+                  alert(result.msg);
                  
                 }
             });
+
+       }
+     
+    }
+    inputChange(){
+       console.log(this.input.length,this.input);
+        if(this.input.length - 1 == 0 ){
+            this.validation.input =true;
+          }else{
+            this.validation.input =false;
+            
+          }
+        
+        
+     
+
+    }
+    passChange(){
+          if(this.password.length == 0){
+          this.validation.pass=true;
+        }else{
+          this.validation.pass=false;
+          
+        }
     }
 
     logout(){
@@ -299,5 +439,77 @@ jQuery(event.target).css('background-color',"lightgrey");
         this.loginStatus = false;
 
     }
+
+    requestOtp(){
+      console.log(this.radioModel);
+      let data={};
+      if(this.radioModel =='otp'){
+
+        data={mobile_no:this.mobile_noL,login:true};
+
+       
+
+      }else{
+        data={mobile_no:this.mobile_no};
+        
+    
+      }
+
+           let headers = new Headers();
+let options = new RequestOptions({ headers: headers });
+      return this.http.post('http://localhost:4700/api/v1/otp/send',data,options)
+        .map(res => res.json())
+
+      
+
+    }
+
+    requestOtpL(){
+        this.requestOtp().subscribe(result =>{
+          if(result.data == false){
+             alert("Invalid mobile no");
+          }else{
+        this.resendOtp=true;
+
+          }
+        
+      })
+
+    }
+
+
+    verifyOtp(){
+      let data={};
+      
+      if(this.radioModel =='otp'){
+        data={mobile_no:this.mobile_noL,otp:this.otpL,login:true};
+    }
+
+      else{
+           data={mobile_no:this.mobile_no,otp:this.otpR};
+    }
+ let headers = new Headers();
+let options = new RequestOptions({ headers: headers });
+      return this.http.post('http://localhost:4700/api/v1/otp/verify',data,options)
+        .map(res => res.json())
+      }
+      verifyOtpL(){
+         this.verifyOtp().subscribe(result =>{
+           if(result.data.otp == false){
+             alert("otp do not match");
+           }else{
+           localStorage.setItem('currentUser', JSON.stringify({ name: result.data.customer.name,_id: result.data.customer._id, token: result.data.token }));
+
+             this.showDialog = !this.showDialog;
+                   this.loginStatus = true;
+                   this.username = result.data.customer.name;
+             this.resendOtp=false;
+
+           }
+        
+      })
+
+      }
+    
 
 }

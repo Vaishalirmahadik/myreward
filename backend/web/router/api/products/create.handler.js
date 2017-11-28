@@ -17,6 +17,7 @@ function enrichproductObj(body, context) {
         no_of_available_items: body.data.no_of_available_items,
         total_Qunatity: body.data.total_Qunatity,
         survey: body.data.survey,
+        fbLink: body.data.fbLink,
         target_audience: {
             age: {
                 min: body.data.target_audience.age.min,
@@ -32,6 +33,13 @@ function enrichproductObj(body, context) {
 async function logic({ body, context }) {
     try {
         let productObj = enrichproductObj(body, context);
+        productObj.tags = [];
+        productObj.tags.push(productObj.name.trim().toLowerCase());
+        productObj.category.forEach(function(element) {
+            productObj.tags.push(element.trim().toLowerCase());
+
+        }, this);
+
         let product = await Product.findOne({ email: productObj.name });
         if (product) throw new ValidationError('product Name Already Exists');
         productObj = new Product(productObj);

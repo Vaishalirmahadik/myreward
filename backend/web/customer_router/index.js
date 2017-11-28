@@ -14,7 +14,10 @@ requestLogger(router);
 require('./api/customer')(router);
 require('./api/orders')(router);
 require('./api/feedbacks')(router);
+require('./api/otp')(router);
+require('./api/products')(router);
 
+require('./api/email')(router);
 
 
 

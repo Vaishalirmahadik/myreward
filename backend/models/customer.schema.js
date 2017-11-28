@@ -19,6 +19,12 @@ function init() {
         city: { type: String },
         gender: { type: String },
         country: { type: String },
+        verify: {
+
+            mobile_no: { type: Boolean },
+            email: { type: Boolean }
+
+        },
         updatedBy: { type: ObjectId, ref: 'user' },
         interests: [{ type: ObjectId, ref: 'interests' }],
         addressess: [{

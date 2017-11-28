@@ -9,6 +9,7 @@ import { AccountPage } from './account.component.ts';
 // import { Widget } from '../layout/widget/widget.directive';
 import { DataTableModule } from 'angular2-datatable';
 import { DialogComponent } from './login/login.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 export const routes = [
   { path: '', component: AccountPage, pathMatch: 'full' }
@@ -20,7 +21,8 @@ export const routes = [
     ButtonsModule.forRoot(),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot()],
+    AccordionModule.forRoot(),
+    StarRatingModule.forRoot()],
   declarations: [ AccountPage,DialogComponent ]
 })
 export class AccountModule {

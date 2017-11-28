@@ -16,6 +16,8 @@ function init() {
         category: [{ type: String }],
         no_of_available_items: { type: Number },
         total_Qunatity: { type: Number },
+        fbLink: { type: String },
+        tags: [{ type: String }],
         survey: [{
             ques: {
                 q: {

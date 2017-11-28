@@ -19,7 +19,7 @@ async function logic({ body, context }) {
         }
 
         if (!customer) {
-            return { success: false, login: false, msg: "Invalid User Name or Password" };
+            return { success: false, login: false, msg: "Invalid Mobile No/ Email  or Password" };
         } else {
             if (customer.is_active == false) {
                 return { success: false, login: false, msg: "Please contact Support. Account Disabled" };

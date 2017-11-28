@@ -21,6 +21,7 @@ const Brand = mongoose.model('brand', require('./brand.schema')(Schema));
 const Product = mongoose.model('product', require('./product.schema')(Schema));
 const Order = mongoose.model('orders', require('./orders.schema')(Schema));
 const User = mongoose.model('user', require('./user.schema')(Schema));
+const Otp = mongoose.model('otp', require('./otp.schema')(Schema));
 
 // registring models
 const model = {
@@ -32,6 +33,7 @@ const model = {
     Product,
     Order,
     User,
+    Otp
 };
 
 module.exports = model;

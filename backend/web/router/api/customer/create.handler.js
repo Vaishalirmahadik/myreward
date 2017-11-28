@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const Customer = rootRequire('models').Customer;
+const Otp = rootRequire('models').Otp;
 
 // const indexMapping = rootRequire('models').IndexMapping;
 
@@ -29,12 +30,18 @@ async function logic({ body, context }) {
         const CustomerObj = enrichCustomerObj(body, context);
         // const { error } = Joi.validate(CustomerObj, customerJoiSchema);
         // if (error) throw new ValidationError(`Customer Validation Error : ${error.message}`);
-        // const customer = await Customer.findOne({ email: CustomerObj.email });
-        // if (customer) throw new ValidationError('Email already exists');
+        const customer = await Customer.findOne({ email: CustomerObj.email });
+        if (customer) throw new ValidationError('Email already exists');
         console.log(CustomerObj);
 
         const CustomerOb = new Customer(CustomerObj);
-        return await CustomerOb.save();
+        let custo = await CustomerOb.save();
+
+        const otpOb = { customer: custo._id };
+        const otpObj = new Otp(otpOb);
+        await otpObj.save();
+
+        return custo;
     } catch (e) {
         logger.error(e);
         throw e;

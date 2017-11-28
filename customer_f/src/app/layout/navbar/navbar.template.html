@@ -7,7 +7,8 @@
     <div class="col-lg-6" style="    display: flex;
     align-items: center;
     justify-content: center;">
-        <input type="text" class="form-control " placeholder="Search">
+        <input type="text" class="form-control " name="sear" [(ngModel)]="sear" placeholder="Search">
+        <button [routerLink]=" ['/app/allProducts-page']" [queryParams]="{search: sear}" class="btn btn-primary" type="button">Search</button>
 
     </div>
     <div class="col-lg-1" style="    display: flex;
@@ -80,15 +81,20 @@ Logout            </button>
                 <form class="login-form mt-lg">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" [(ngModel)]="input" name="input" placeholder="Email/Mobile No.">
+                        <input #model1="ngModel" type="text" class="form-control" [(ngModel)]="input" name="input" required placeholder="Email/Mobile No.">
+                        <span *ngIf="model1.invalid && inputerror == true" style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
                     <div class="form-group">
-                        <input class="form-control" id="pswd" [(ngModel)]="password" name="password" type="password" placeholder="Password">
+                        <input #model2="ngModel" class="form-control" id="pswd" [(ngModel)]="password" name="password" required="required" type="password" placeholder="Password">
+                        <span *ngIf="model2.invalid && passerror == true" style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
                     <div style="    text-align: center;">
-                        <button (click)="login()" class="btn btn-primary" type="button">
+                        <button (click)="login(model1.invalid,model2.invalid)" type="submit" class="btn btn-primary" type="button">
               Login 
             </button>
+
                     </div>
 
                 </form>
@@ -97,12 +103,18 @@ Logout            </button>
                 <form class="login-form mt-lg">
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Mobile No.">
+                        <input type="text" *ngIf="resendOtp == false" class="form-control" name="mobile_noL" [(ngModel)]="mobile_noL" placeholder="Mobile No.">
+                        <input type="text" *ngIf="resendOtp == true" class="form-control" name="otpL" [(ngModel)]="otpL" placeholder="OTP">
+                        <span *ngIf="resendOtp == true" (click)="requestOtpL()" class="help-block"><a>Resend OTP</a></span>
+
                     </div>
 
                     <div style="    text-align: center;">
-                        <button class="btn btn-primary" type="button">
+                        <button *ngIf="resendOtp == false" (click)="requestOtpL()" class="btn btn-primary" type="button">
               Get OTP 
+            </button>
+                        <button *ngIf="resendOtp == true" (click)="verifyOtpL()" class="btn btn-primary" type="button">
+              Login 
             </button>
                     </div>
 
@@ -115,24 +127,39 @@ Logout            </button>
                     <div *ngIf="wizard[0].active == true" class="form-group">
                         Name
                         <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="name">
+                        <span *ngIf="validation.name " style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
                     <div *ngIf="wizard[0].active == true" class="form-group">
                         Email
 
                         <input type="text" class="form-control" placeholder="Email" name="email" [(ngModel)]="email">
+                        <span *ngIf="validation.email" style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
                     <div *ngIf="wizard[1].active == true" class="form-group">
                         Mobile No
 
                         <input type="text" class="form-control" placeholder="Mobile No" name="mobile_no" [(ngModel)]="mobile_no">
+                        <span *ngIf="validation.mobile_no" style="    color: Red;" class="help-block">This field is required</span>
+
+                    </div>
+                    <div *ngIf="wizard[2].active == true" class="form-group">
+                        OTP
+
+                        <input type="text" class="form-control" placeholder="otp" name="otpR" [(ngModel)]="otpR">
+                        <span *ngIf="validation.otp" style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
                     <div *ngIf="wizard[0].active == true" class="form-group">
                         Password
 
                         <input type="password" class="form-control" placeholder="" name="password" [(ngModel)]="password">
+                        <span *ngIf="validation.pass" style="    color: Red;" class="help-block">This field is required</span>
+
                     </div>
 
-                    <div *ngIf="wizard[2].active == true" class="form-group">
+                    <div *ngIf="wizard[3].active == true" class="form-group">
                         Gender
                         <div class="form-group row">
                             <!--<label for="normal-field" class="col-md-4  col-form-label text-md-right">Gender</label>-->
@@ -152,24 +179,27 @@ Logout            </button>
 
                         </div>
                     </div>
-                    <div *ngIf="wizard[2].active == true" class="form-group">
-                        Date of Birth
-                        <input type="text" name="dob" [(ngModel)]="dob" class="form-control" placeholder="DD/MM/YYYY">
-                    </div>
                     <div *ngIf="wizard[3].active == true" class="form-group">
+                        Date of Birth
+                        <input type="text" name="dob" [(ngModel)]="dob" class="form-control" placeholder="MM/DD/YYYY">
+                        <span *ngIf="validation.dob" style="    color: Red;" class="help-block">This field is required</span>
+                        <span *ngIf="validation.dobFormat" style="    color: Red;" class="help-block">DOB formar : mm/dd/yyyy</span>
+
+                    </div>
+                    <div *ngIf="wizard[4].active == true" class="form-group">
                         City
                         <input type="text" name="city" [(ngModel)]="city" class="form-control" placeholder="City">
                     </div>
-                    <div *ngIf="wizard[3].active == true" class="form-group">
+                    <div *ngIf="wizard[4].active == true" class="form-group">
                         State
                         <input type="text" name="state" [(ngModel)]="state" class="form-control" placeholder="State">
                     </div>
 
-                    <div *ngIf="wizard[3].active == true" class="form-group">
+                    <div *ngIf="wizard[4].active == true" class="form-group">
                         Country
                         <input type="text" name="country" [(ngModel)]="country" class="form-control" placeholder="Country">
                     </div>
-                    <div *ngIf="wizard[4].active == true" class="form-group" style="display: flex;">
+                    <div *ngIf="wizard[5].active == true" class="form-group" style="display: flex;">
 
                         <div class="form-group row">
                             <label for="normal-field" class="col-md-4  col-form-label text-md-right"><b>Interests</b></label>
@@ -181,7 +211,7 @@ Logout            </button>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="wizard[5].active == true" class="form-group" style="display: flex;">
+                    <div *ngIf="wizard[6].active == true" class="form-group" style="display: flex;">
                         <p> Registration Successful</p>
                         <p> Please verify Your Email Address, by link send on ur Email Address</p>
 
@@ -189,7 +219,7 @@ Logout            </button>
 
 
                     <div style="    text-align: center;">
-                        <button *ngIf="wizard[5].active == false" class="btn btn-primary" type="button" (click)="nextWizard()">
+                        <button *ngIf="wizard[6].active == false" class="btn btn-primary" type="button" (click)="nextWizard()">
               Next
             </button>
                         <!--<button class="btn btn-primary" type="button" (click)="register()">

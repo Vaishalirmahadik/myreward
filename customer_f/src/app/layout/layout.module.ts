@@ -4,6 +4,8 @@ import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule }  from '@angular/forms';
 // import { TooltipModule } from 'ngx-bootstrap';
+import 'parsleyjs';
+
 import {DatePickerModule} from 'ng2-datepicker-bootstrap';
 import { ROUTES }       from './layout.routes';
 import { AlertModule, TooltipModule } from 'ngx-bootstrap';

@@ -50,8 +50,9 @@ export class AllProductsPage {
            this.route.queryParams.subscribe(params => {
           let brand= params['brand'];
           let category = params['category'];
+          let search = params['search'];
 
-     if(brand == undefined && category == undefined){
+     if(brand == undefined && category == undefined && search == undefined){
         let headers = new Headers();
 
        let options = new RequestOptions({ headers: headers });
@@ -70,6 +71,28 @@ export class AllProductsPage {
 
         })
 
+    }else if(brand == undefined && category == undefined && search != undefined){
+
+         let headers = new Headers();
+
+       let options = new RequestOptions({ headers: headers });
+
+           this.http.get('http://localhost:4700/api/v1/product/getAll/'+"search",{params: {search:search }})
+        .map(res => res.json())
+        .subscribe(result =>{
+           console.log('res products search', result)
+           this.productList = result.data.products;
+                 this.productList = result.data.products.filter((item,i) =>{
+            return item.images.filter((img,i) =>{
+            return item.images[i] = "http://localhost:4700"+item.images[i].slice(item.images[i].indexOf("/"));
+            })
+          });
+        //  this.router.navigate(['/app/allProducts-page'], { queryParams: {brand: brands, category: categories} });
+
+          // this.data = result.data.brands;
+
+        })
+      
     }else{
        let headers = new Headers();
 

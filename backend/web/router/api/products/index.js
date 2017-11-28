@@ -6,10 +6,10 @@ const updateHandler = require('./updateHandler');
 
 module.exports = (router) => {
 
-    router.post('/product/create', createHandler);
-    router.get('/product/getAll/:_id', getAllHandler);
-    router.get('/product/get/:_id', getHandler);
-    router.get('/product/update', updateHandler);
+    router.post('/product/admin/create', createHandler);
+    router.get('/product/admin/getAll/:_id', getAllHandler);
+    router.get('/product/admin/get/:_id', getHandler);
+    router.get('/product/admin/update', updateHandler);
 
 
 };

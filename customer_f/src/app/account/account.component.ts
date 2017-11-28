@@ -9,7 +9,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class AccountPage {
 
-    radioModel='given';
+    radioModel='descriptive';
     email:any;
     name:any;
     mobile_no:any;
@@ -36,6 +36,7 @@ showDialogFeedBack:any=false;
     showFileNames:any;
     filesToUpload:any;
     text:any;
+     
 
     constructor(private http:Http, private route: ActivatedRoute,router:Router){
 
@@ -198,8 +199,26 @@ clickSave(){
     console.log("submitFeedBack",this.feedBackProduct);
 
 
+    if(this.radioModel == 'descriptive'){
+       let info = {
+          feedbackId: this.feedbackId,
+          obj:{
+            product:this.feedBackProduct._id,
+            text:this.text
+          }
+        };
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+         this.http.post('http://localhost:4700/api/v1/feedback/update', {data:info},options)
+        .map(files => files.json())
+        .subscribe(files => {
+          this.showDialogFeedBack = !this.showDialogFeedBack;
+          alert("feedback submitted");
 
-        const formData: any = new FormData();
+          console.log('files', files)})
+
+    }else if(this.radioModel == 'audio'){
+       const formData: any = new FormData();
     const files: Array<File> = this.filesToUpload;
     console.log(files);
 
@@ -212,8 +231,6 @@ clickSave(){
           feedbackId: this.feedbackId,
           obj:{
             product:this.feedBackProduct._id,
-            survey:this.feedBackProduct.survey,
-            text:this.text
           }
         };
         formData.append('data', JSON.stringify(info));
@@ -224,10 +241,36 @@ clickSave(){
         this.http.post('http://localhost:4700/api/v1/feedback/update', formData,options)
         .map(files => files.json())
         .subscribe(files => {
-          this.showDialogFeedBack  != this.showDialogFeedBack;
+          this.showDialogFeedBack = !this.showDialogFeedBack;
           alert("feedback submitted");
 
           console.log('files', files)})
+
+    }else if(this.radioModel == 'ques'){
+
+       let info = {
+          feedbackId: this.feedbackId,
+          obj:{
+            product:this.feedBackProduct._id,
+            survey:this.feedBackProduct.survey,
+          }
+        };
+        let headers = new Headers();
+        let options = new RequestOptions({ headers: headers });
+         this.http.post('http://localhost:4700/api/v1/feedback/update', {data:info},options)
+        .map(files => files.json())
+        .subscribe(files => {
+          this.showDialogFeedBack = !this.showDialogFeedBack;
+          alert("feedback submitted");
+
+          console.log('files', files)})
+
+
+    }
+
+
+
+       
           
           
 
@@ -244,7 +287,9 @@ clickSave(){
      
     //  let files = [].slice.call(event.target.files);
   }
- 
+
+
+   
 
 
 }
