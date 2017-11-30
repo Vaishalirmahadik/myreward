@@ -158,5 +158,24 @@ fileChangeEvent(fileInput: any) {
     // this.showFileNames = files;
     //this.product.photo = fileInput.target.files[0]['name'];
 }
+deleteCat(i,a){
+  this.categoryList.splice(a,1);
+}
+deleteFile(i,a){
+this.showFileNames.splice(a,1);
+
+
+}
+deleteVideo(i,a){
+this.videoLinkList.splice(a,1);
+
+}
+backWizard(){
+
+   this.count = this.count -1;
+        this.wizard[this.count +1 ].active =false;
+        this.wizard[this.count].active =true;
+
+}
 
 }

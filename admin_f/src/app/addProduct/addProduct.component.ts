@@ -41,6 +41,8 @@ surveyType:any="descriptive";
 noOpt:any=true;
 optionList:any=[];
 option:any;
+tag:any;
+tagList:any=[];
 // id:any;
 constructor(private route: ActivatedRoute,private http:Http,private router:Router){
      this.editorContent = 'My Document\'s Description'
@@ -89,16 +91,37 @@ constructor(private route: ActivatedRoute,private http:Http,private router:Route
   // }
 
   addVideo(){
+  if(this.videoLink != undefined && this.videoLink != ""){
+    
     this.videoLinkList.push(this.videoLink);
+    this.videoLink = "";
+  }
   }
   addCategory(){
+    console.log("cat",this.category);
+  if(this.category != undefined && this.category != ""){
+    
     this.categoryList.push(this.category);
+
+  }
   }
   addLocation(){
+  if(this.location != undefined && this.location != ""){
+    
      this.locationList.push(this.location);
+     this.location="";
+      }
+
   }
   addOption(){
+
+  if(this.option != undefined && this.option != ""){
+    
+    
      this.optionList.push({o:this.option});
+     this.option="";
+
+  }
     
   }
 
@@ -108,6 +131,8 @@ constructor(private route: ActivatedRoute,private http:Http,private router:Route
       options:this.optionList,
       typeO:{t:this.surveyType}
     });
+    this.optionList = [];
+    this.option ="";
   }
   sub(){
       console.log(this.editorContent);
@@ -136,6 +161,7 @@ constructor(private route: ActivatedRoute,private http:Http,private router:Route
         fbLink: this.fbLink,
         updatedBy: undefined,
         brand:this.brandId,
+        tags:this.tagList,
         no_of_available_items:this.nAvailable,
         total_Qunatity:this.nAvailable,
         survey:this.surveyList,
@@ -160,7 +186,7 @@ constructor(private route: ActivatedRoute,private http:Http,private router:Route
     // formData.append("uploads[]", files[0], files[0]['name']);
     // this.address.documents = files.toString();
 
-        this.http.post('http://localhost:4700/api/v1/product/create', formData,options)
+        this.http.post('http://localhost:4700/api/v1/product/admin/create', formData,options)
         .map(files => files.json())
         .subscribe(files => {
           alert("Product Created");
@@ -226,4 +252,44 @@ changeSurveyType(){
     this.noOpt = false;
   }
 }
+addTag(i){
+  if(this.tag != undefined && this.tag != ""){
+     this.tagList.push(this.tag);
+     this.tag="";
+  }
+
+  
+
+}
+deleteTag(i,a){
+this.tagList.splice(a,1);
+}
+deleteCat(i,a){
+  this.categoryList.splice(a,1);
+}
+deleteFile(i,a){
+this.showFileNames.splice(a,1);
+
+
+}
+deleteVideo(i,a){
+this.videoLinkList.splice(a,1);
+
+}
+deleteLocation(i,a){
+this.locationList.splice(a,1);
+  
+}
+deleteOption(i,a){
+  console.log(i);
+  this.optionList.splice(a,1);
+}
+backWizard(){
+
+   this.count = this.count -1;
+        this.wizard[this.count +1 ].active =false;
+        this.wizard[this.count].active =true;
+
+}
+
 }
