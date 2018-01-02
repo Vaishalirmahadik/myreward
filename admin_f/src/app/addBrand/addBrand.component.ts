@@ -62,10 +62,17 @@ constructor(private route: ActivatedRoute,private http:Http,private router:Route
   }
 
   addVideo(){
+      if(this.videoLink != undefined && this.videoLink != ""){
+
     this.videoLinkList.push(this.videoLink);
+    this.videoLink ="";
+      }
   }
   addCategory(){
+      if(this.category != undefined && this.category != ""){
+
     this.categoryList.push(this.category);
+      }
   }
   sub(){
       console.log(this.editorContent);
